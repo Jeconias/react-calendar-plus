@@ -4,10 +4,6 @@ let Calendar = (function(){
     let instance;
     const projectName = 'Calendar';
 
-    let writeConsole = function(message){
-        console.log('# ' + projectName + ': ' + message);
-    }
-
     // CLASS/FUNCAO PRINCIPAL QUE CONTEM OS METODOS NECESSARIO PARA O CALENDARIO
     let Calendar = function(container){
 
@@ -181,9 +177,31 @@ let Calendar = (function(){
         return methodsPublic;
     }
 
+    let writeConsole = (message) => console.log('# ' + projectName + ': ' + message);
+
+    // VERIFICAR SE UM OBJETO OU SUB-OBJETO EXISTE
+    let verifyObject = function(obj, path = '') {
+        if(typeof obj === 'object' && Array.isArray(obj) === true || obj == '' || obj === null)
+        {
+            writeConsole('You must pass a valid object');
+            return false;
+        }
+
+        let paths = path.split('.'), size = paths.length, i = 0;
+
+        if(size === 1 && path === '') return obj;
+
+        while(obj != undefined && i < size)
+        {
+            obj = obj[paths[i++]];
+        }
+
+        return (i && i == size) ? obj : undefined
+    }
+
     // METODO INIT QUE FAZ PAPEL DE CONSTRUTOR
     Calendar.init = function(config){
-
+        
         // CRIANDO OS OBJETOS NECESSARIOS
         this.container = {};
         let paths = {
