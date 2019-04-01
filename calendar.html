@@ -11,43 +11,80 @@
 </head>
 <body>
 
-    <div class="calendar" id="calendar">
-        <div class="calendarHeader">
-            <div>
-                <div class="calendarActionBefore"><i></i></div>
-                <h1 id="calendarHeaderMonth">Janeiro</h1>
-                <span id="calendarHeaderYear">2019</span>
-                <div class="calendarActionAfter"><i></i></div>
-            </div>
-            <div class="calendarDaysWeek">
-                <ul>
-                    <li>DOM</li>
-                    <li>SEG</li>
-                    <li>TER</li>
-                    <li>QUA</li>
-                    <li>QUI</li>
-                    <li>SEX</li>
-                    <li>SÁB</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="calendarBody"></div>
-
-    </div>
+    <div class="calendar" id="calendar"></div>
+        
 </body>
 <script src="./js/calendar.js"></script>
 <script>
+    const eventsDataBase = {
+        events: 
+        [
+            {
+                name    : 'Evento Chega Mais',
+                data    : '20-3-2019',
+                hora    : '18:00',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+            {
+                name    : 'Quebra Tudo',
+                data    : '30-2-2019',
+                hora    : '22:00',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+            {
+                name    : 'O Evento é esse',
+                data    : '20-3-2019',
+                hora    : '22:30',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+            {
+                name    : 'Edição Gamer',
+                data    : '20-3-2019',
+                hora    : '15:30',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+
+            {
+                name    : 'Vem pegar o seu @',
+                data    : '20-3-2019',
+                hora    : '00:15',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+
+            {
+                name    : 'Orgilandia',
+                data    : '20-3-2019',
+                hora    : '22:22',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+
+            {
+                name    : 'ScrollBar',
+                data    : '20-3-2019',
+                hora    : '10:10',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+
+            {
+                name    : 'DocePipoca',
+                data    : '17-3-2019',
+                hora    : '07:15',
+                autor   : 'Mario',
+                link    : 'link para o evento',
+            },
+            
+        ]
+    };
+
     let calendarJS = new Calendar();
+    calendarJS.render('#calendar').addEvents(eventsDataBase);
 
-    calendarJS
-    .currentYear('#calendarHeaderYear')
-    .currentMonth('#calendarHeaderMonth')
-    .renderBody('.calendarBody');
-
-    document.getElementsByClassName('calendarActionBefore')[0].addEventListener('click', function(){
-        //DISABLED
-        console.log('Disabled');
-    });
 </script>
 </html>
