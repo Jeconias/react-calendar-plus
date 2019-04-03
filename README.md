@@ -6,4 +6,4 @@ Esse é um calendário com JavaScript que tem como propósito ser fléxivel para
 `Detalhamento no próximo update.`
 
 ##### Estilo atual do calendário:
-![Estilo atual do calendário](calendarJS.png)
+![Estilo atual do calendário](./images/calendarJS.png)
