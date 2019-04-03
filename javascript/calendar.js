@@ -209,6 +209,9 @@ let Calendar = (function(){
             // RENDERIZAR O CORPO
             renderBody();
 
+            // CARREGAR OS EVENTOS NAS DATAS
+            addCalendarEvent();
+
             // ADICIONAR OS EVENTOS
             eventNew(container.tags.classes.calendarActionBefore, 'click', lastMonth);
             eventNew(container.tags.classes.calendarActionAfter, 'click', nextMonth);
@@ -391,10 +394,6 @@ let Calendar = (function(){
 
         // METODOS PUBLICOS PARA O USUARIO
         let methodsPublic = {
-            select      : selector,
-            text        : text,
-            currentYear : currentYear,
-            currentMonth: currentMonth,
             render      : renderContainer,
             addEvents   : addCalendarEvent
         }
