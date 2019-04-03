@@ -112,21 +112,22 @@
     margin-top: 5px;
     padding: 5px 8px;
     list-style: none;
-    background-color: #EDEDED;
+    background-color: #fe623edb;
     text-align: left;
     font-size: 0.9em;
 }
 
 .eventDetails a {
     text-decoration: none;
-    color: #444;
-    font-weight: 500;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.8em;
     cursor: pointer;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in;
 }
 
 .eventDetails a:hover {
-    color: #FE980F;
+    color: #1A363F;
 }
 
 .calendarHeader > div:first-child {

@@ -7,9 +7,13 @@ let Calendar = (function(){
     // CLASS/FUNCAO PRINCIPAL QUE CONTEM OS METODOS NECESSARIO PARA O CALENDARIO
     let Calendar = function(container){
 
-        this.selected = null;
-        this.bodyToRender = null;
-        this.eventsSave = null;
+        this.selected       = null;
+        this.bodyToRender   = null;
+        this.eventsSave     = null;
+        this.areaTouches    = {
+            clientX: 0, 
+            clientY: 0
+        };
 
         // VERIFICAR SE O ANO EH BISSEXTO
         const leap = () =>
@@ -96,7 +100,7 @@ let Calendar = (function(){
             addCalendarEvent();
 
             // RECARREGAR O EVENTO PARA FECHAR OS DETALHES
-            eventNew(container.tags.ids.hiddenEventsDetails, 'click', hiddenEventsDetails);
+            eventNew(container.tags.ids.hiddenDayEvents, 'click', hiddenDayEvents);
         }
 
         // SELECIONAR TAGS
@@ -146,6 +150,48 @@ let Calendar = (function(){
             return methodsPublic;
         }
 
+        // CAPTURAR PONTOS DE TOQUE
+        const touchStart = (event) =>
+        {
+            const touch = event.touches[0] || event.originalEvent.touches[0];
+
+            this.areaTouches = {
+                clientX: touch.clientX, 
+                clientY: touch.clientY
+            }
+
+            return;
+        }
+
+        // CAPTURAR MOVIMENTO
+        const touchMove = (event) => 
+        {
+            if(!this.areaTouches.clientX || !this.areaTouches.clientY) return;
+            
+            const clientX = event.targetTouches[0].clientX;
+            const clientY = event.targetTouches[0].clientY;
+
+            const diffX = (this.areaTouches.clientX - clientX);
+            const diffY = (this.areaTouches.clientY - clientY);
+
+            if(Math.abs(diffX) > Math.abs(diffY)) 
+            {
+                if(diffX < 0) 
+                {
+                    lastMonth();
+                }else{
+                    nextMonth();
+                }
+            }
+
+            this.areaTouches = {
+                clientX: 0,
+                clientY: 0
+            }
+
+            return;
+        }
+
         const renderContainer = (target) =>
         {
             if(target == null || target == '' || target.substring(1, 0) != '#') { 
@@ -166,7 +212,9 @@ let Calendar = (function(){
             // ADICIONAR OS EVENTOS
             eventNew(container.tags.classes.calendarActionBefore, 'click', lastMonth);
             eventNew(container.tags.classes.calendarActionAfter, 'click', nextMonth);
-            eventNew(container.tags.ids.hiddenEventsDetails, 'click', hiddenEventsDetails);
+            eventNew(container.tags.ids.hiddenDayEvents, 'click', hiddenDayEvents);
+            eventNew(container.tags.classes.calendarBody, 'touchstart', touchStart);
+            eventNew(container.tags.classes.calendarBody, 'touchmove', touchMove);
 
             return methodsPublic;
         }
@@ -201,7 +249,7 @@ let Calendar = (function(){
             let buttonContainer = document.createElement('div');
             let buttonEventsDetails = document.createElement('span');
 
-            buttonEventsDetails.id = container.tags.ids.hiddenEventsDetails.substring(1);
+            buttonEventsDetails.id = container.tags.ids.hiddenDayEvents.substring(1);
             buttonContainer.appendChild(buttonEventsDetails);
 
             eventsContainer.className = container.tags.classes.eventDetails.substring(1);
@@ -271,7 +319,7 @@ let Calendar = (function(){
 
         }
 
-        const eventsShow = (event) =>
+        const showDayEvents = (event) =>
         {
             selector(container.tags.ids.eventDetails);
             
@@ -291,7 +339,7 @@ let Calendar = (function(){
             this.selected[0].style.transform = 'translateX(0)';
         }
 
-        const hiddenEventsDetails = () => 
+        const hiddenDayEvents = () => 
         {
             selector(container.tags.ids.eventDetails);
             this.selected[0].style.transform = 'translateX(-100%)';
@@ -331,7 +379,7 @@ let Calendar = (function(){
                             span.innerHTML = '';
                             span.appendChild(spanNew);
 
-                            spanNew.addEventListener('click', eventsShow, false);
+                            spanNew.addEventListener('click', showDayEvents, false);
                         }
                     }.bind(this));
                     eventsLength--;
@@ -438,7 +486,7 @@ let Calendar = (function(){
             eventDetails        : '#eventDetails',
             calendarHeaderYear  : '#calendarHeaderYear',
             calendarHeaderMonth : '#calendarHeaderMonth',
-            hiddenEventsDetails : '#hiddenEventsDetails'
+            hiddenDayEvents     : '#hiddenDayEvents'
         }
 
         this.container.tags.classes = {
