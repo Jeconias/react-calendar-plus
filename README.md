@@ -5,7 +5,7 @@ Esse é um calendário com JavaScript que tem como propósito ser fléxivel para
 
 #### Como utilizar
 
-- Carregue o [calendarjs.js](./javascript/CalendarJS.js) e [calendarjs.css](./stylecheet/CalendarJS.css)
+- Carregue o [CalendarJS.js](./javascript/CalendarJS.js) e [CalendarJS.css](./stylesheet/CalendarJS.css)
 no seu projeto.
 - Instancie a classe do CalendarJS na sua aplicação e insira o ID da div que irá receber o CalendarJS:
 
