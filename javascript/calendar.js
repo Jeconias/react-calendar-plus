@@ -327,11 +327,14 @@ let Calendar = (function(){
             const lastParent = clickedSpan.parentElement;
             const eventDetailsUl = this.selected[0].childNodes[1];
             let list = '';
-            
+            let link;
+
             this.eventsSave.events.forEach(function(element){
                 if(lastParent.getAttribute('data-date') === element.data)
                 {
-                    list += '<li><a href="#">'+ element.name +' - '+ element.hora +'</a></li>';
+                    link = (element.link != undefined) ? element.link : "#";
+
+                    list += '<li><a href="'+ link +'" target="_blank" rel="noopener noreferrer">'+ element.name +' - '+ element.hora +'</a></li>';
                 }
             });
 
@@ -345,12 +348,9 @@ let Calendar = (function(){
             this.selected[0].style.transform = 'translateX(-100%)';
         }
 
-        const addCalendarEvent = (eventsObj = null) =>
+        const addCalendarEvent = (eventsObj) =>
         {
-            if(eventsObj != null)
-            {
-                this.eventsSave = eventsObj;
-            }
+            if(eventsObj != undefined){ this.eventsSave = eventsObj }
 
             if(this.eventsSave == undefined || this.eventsSave === null) return {};
 

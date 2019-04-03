@@ -24,14 +24,13 @@
                 data    : '20-3-2019',
                 hora    : '18:00',
                 autor   : 'Mario',
-                link    : 'link para o evento',
             },
             {
-                name    : 'Quebra Tudo',
-                data    : '30-2-2019',
+                name    : 'Quebrando Tudo',
+                data    : '20-3-2019',
                 hora    : '22:00',
                 autor   : 'Mario',
-                link    : 'link para o evento',
+                link    : '#a',
             },
             {
                 name    : 'O Evento é esse',
@@ -84,7 +83,7 @@
     };
 
     let calendarJS = new Calendar();
-    calendarJS.render('#calendar').addEvents(eventsDataBase);
+    calendarJS.render('#calendar').addEvents(eventsDataBase, 'name.hora.estilo');
 
 </script>
 
