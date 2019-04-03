@@ -56,8 +56,12 @@ no seu projeto.
 |render       | ID     | Renderiza o calendário | Retorna os métodos públicos |
 |addEvents    | Array de Objetos | Insere os eventos no calendário | -- |
 
+#### Changelog
 
-##### Estilo atual do calendário:
+ - v0.1 - initiated ;)
+
+#### Estilo atual do calendário:
+
 ![Estilo atual do calendário](./images/calendarJS.png)
 
 Ao clicar em alguma data com eventos:
