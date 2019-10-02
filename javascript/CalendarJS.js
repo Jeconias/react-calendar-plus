@@ -11,7 +11,7 @@ let Calendar = (function(){
         this.bodyToRender   = null;
         this.eventsSave     = null;
         this.areaTouches    = {
-            clientX: 0, 
+            clientX: 0,
             clientY: 0
         };
 
@@ -39,7 +39,7 @@ let Calendar = (function(){
                 container.global.currentYear--;
             }
             newDate();
-            return; 
+            return;
         }
 
         // QUADO O MES FOR IGUAL A 11, VOLTAR PARA 0 E AVANCAR UM ANO
@@ -53,7 +53,7 @@ let Calendar = (function(){
                 container.global.currentYear++;
             }
             newDate();
-            return; 
+            return;
         }
 
         // RETORNA A QUANTIDADE DE DIAS DO MES ATUAL
@@ -64,18 +64,18 @@ let Calendar = (function(){
 
             if(currentMonth == -1) currentMonth = 11;
 
-            if (currentMonth == 0 
-                || currentMonth == 2 
-                || currentMonth == 4 
-                || currentMonth == 6 
-                || currentMonth == 7 
-                || currentMonth == 9 
+            if (currentMonth == 0
+                || currentMonth == 2
+                || currentMonth == 4
+                || currentMonth == 6
+                || currentMonth == 7
+                || currentMonth == 9
                 || currentMonth == 11) {
                 return  31;
             } else if (
-                    currentMonth == 3 
-                ||  currentMonth == 5 
-                ||  currentMonth == 8 
+                    currentMonth == 3
+                ||  currentMonth == 5
+                ||  currentMonth == 8
                 ||  currentMonth == 10) {
                 return 30;
             } else {
@@ -124,7 +124,7 @@ let Calendar = (function(){
         // SETAR UM NOVO ANO NAS TAGS SELECIONADAS
         const currentYear = (target = null) =>
         {
-            if(target == null || target == '') { 
+            if(target == null || target == '') {
                 writeConsole('currentYear needs a valid parameter'); return false;
             }
             selector(target);
@@ -156,7 +156,7 @@ let Calendar = (function(){
             const touch = event.touches[0] || event.originalEvent.touches[0];
 
             this.areaTouches = {
-                clientX: touch.clientX, 
+                clientX: touch.clientX,
                 clientY: touch.clientY
             }
 
@@ -164,19 +164,19 @@ let Calendar = (function(){
         }
 
         // CAPTURAR MOVIMENTO
-        const touchMove = (event) => 
+        const touchMove = (event) =>
         {
             if(!this.areaTouches.clientX || !this.areaTouches.clientY) return;
-            
+
             const clientX = event.targetTouches[0].clientX;
             const clientY = event.targetTouches[0].clientY;
 
             const diffX = (this.areaTouches.clientX - clientX);
             const diffY = (this.areaTouches.clientY - clientY);
 
-            if(Math.abs(diffX) > Math.abs(diffY)) 
+            if(Math.abs(diffX) > Math.abs(diffY))
             {
-                if(diffX < 0) 
+                if(diffX < 0)
                 {
                     lastMonth();
                 }else{
@@ -194,7 +194,7 @@ let Calendar = (function(){
 
         const renderContainer = (target) =>
         {
-            if(target == null || target == '' || target.substring(1, 0) != '#') { 
+            if(target == null || target == '' || target.substring(1, 0) != '#') {
                 writeConsole('render needs a valid parameter. Ex: #calendarId'); return false;
             }
             // SELECIONAR O CONTAINER DO CALENDARIO
@@ -246,7 +246,7 @@ let Calendar = (function(){
             </div>';
         }
 
-        const renderEventsDetails = () => 
+        const renderEventsDetails = () =>
         {
             let eventsContainer = document.createElement('div');
             let buttonContainer = document.createElement('div');
@@ -259,7 +259,7 @@ let Calendar = (function(){
             eventsContainer.id = container.tags.ids.eventDetails.substring(1);
             eventsContainer.appendChild(buttonContainer);
             eventsContainer.appendChild(document.createElement('ul'));
-            
+
             return eventsContainer;
         }
 
@@ -280,13 +280,13 @@ let Calendar = (function(){
 
             for(let i = 1; i <= totalDaysInt; i++)
             {
-                renderStr += (i == container.global.currentDay && 
-                    container.global.currentMonth === today.getMonth() && 
+                renderStr += (i == container.global.currentDay &&
+                    container.global.currentMonth === today.getMonth() &&
                     container.global.currentYear === today.getFullYear()
                 ) ? '<span data-date="'+ i +'-'+ container.global.currentMonth +'-'+ container.global.currentYear +'" class="calendarToday"><span title="Hoje">' + i + '</span></span>' : '<span data-date="'+ i +'-'+ container.global.currentMonth +'-'+ container.global.currentYear +'">' + i + '</span>'
             }
 
-            
+
             for(let i = 1; i <= totalDaysNextMonth; i++)
             {
                 renderStr += '<span data-date="'+ i +'-'+ (container.global.currentMonth + 1) +'-'+ container.global.currentYear +'" class="calendarLastAndNextMonth">' + i + '</span>';
@@ -325,7 +325,7 @@ let Calendar = (function(){
         const showDayEvents = (event) =>
         {
             selector(container.tags.ids.eventDetails);
-            
+
             const clickedSpan = event.target;
             const lastParent = clickedSpan.parentElement;
             const eventDetailsUl = this.selected[0].childNodes[1];
@@ -345,7 +345,7 @@ let Calendar = (function(){
             this.selected[0].style.transform = 'translateX(0)';
         }
 
-        const hiddenDayEvents = () => 
+        const hiddenDayEvents = () =>
         {
             selector(container.tags.ids.eventDetails);
             this.selected[0].style.transform = 'translateX(-100%)';
@@ -388,7 +388,7 @@ let Calendar = (function(){
                     eventsLength--;
                 }
             }.bind(this));
-            
+
             return methodsPublic;
         };
 
@@ -466,7 +466,7 @@ let Calendar = (function(){
                 }
             }
         }
-    
+
         let localDate = new Date();
 
         this.container.global = {
@@ -498,55 +498,55 @@ let Calendar = (function(){
 
         // IDIOMA PADRAO DA SEMANA
         this.container.lang.daysWeek = [
-            'Dom',
-            'Seg',
-            'Ter',
-            'Qua',
-            'Qui',
-            'Sex',
-            'Sáb'
+            'Sun',
+            'Mon',
+            'Tue',
+            'Wed',
+            'Thu',
+            'Fri',
+            'Sat'
         ];
 
         // IDIOMA PADRAO DO MES
         this.container.lang.months = [
-            'Janeiro',
-            'Fevereiro',
-            'Março',
-            'Abril',
-            'Maio',
-            'Junho',
-            'Julho',
-            'Agosto',
-            'Setembro',
-            'Outubro',
-            'Novembro',
-            'Dezembro'
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
         ];
 
         if(config != null)
         {
             // VALIDAR OS DIAS DA SEMANA
-            if(verifyObject(config, 'lang.daysWeek') != undefined){ 
+            if(verifyObject(config, 'lang.daysWeek') != undefined){
                 if(Array.isArray(config.lang.daysWeek) === false || config.lang.daysWeek.length < 7) {
                     writeConsole('"daysWeek" must be an array with 7 values.');
                 }
                 this.container.lang.daysWeek = config.lang.daysWeek;
             }
-    
+
             // VALIDAR OS MESES
-            if(verifyObject(config, 'lang.months') != undefined){ 
+            if(verifyObject(config, 'lang.months') != undefined){
                 if(Array.isArray(config.lang.months) === false || config.lang.months.length < 11) {
                     writeConsole('"months" must be an array with 11 values.');
                 }
                 this.container.lang.months = config.lang.months;
             }
         }
-        
+
         writeConsole('Dev -> ' + this.container.dev.name);
         writeConsole('gitHub -> ' + this.container.dev.github);
         return new Calendar(this.container);
     }
-    
+
     return function(config = null){
         writeConsole('Loading...');
 
