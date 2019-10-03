@@ -1,4 +1,4 @@
-const id_ID = {
+const idID = {
   daysWeek: ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"],
   months: [
     "Januari",
@@ -16,4 +16,4 @@ const id_ID = {
   ]
 };
 
-export default id_ID;
+export default idID;
