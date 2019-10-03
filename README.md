@@ -2,15 +2,14 @@
 
 This is a JavaScript calendar that is intended to be flexible for entering events or reminders on certain dates.
 
-
 #### How to use
 
-- Load [CalendarJS.js](./javascript/CalendarJS.js) and [CalendarJS.css](./stylesheet/CalendarJS.css) into your project.
+- Load [CalendarJS.js](./javascript/CalendarJS.js) and [DefaultStyle.css](./stylesheet/DefaultStyle/DefaultStyle.css) into your project.
 - Instantiate the CalendarJS class in your application and enter the div ID that will receive CalendarJS:
 
 ```
     const calendarJS = new Calendar();
-    calendarJS.render('#calendar'); 
+    calendarJS.render('#calendar');
 ```
 
 - You can insert events using the **addEvents** method like this:
@@ -47,23 +46,21 @@ This is a JavaScript calendar that is intended to be flexible for entering event
     calendarJS.addEvents(arrayObj).render('#calendar');
 ```
 
-
 #### Available Methods
 
-| Method | Parameters | Action | Return |
-|--------|------------|------|---------|
-|render       | ID     | Render the calendar | Returns public methods |
-|addEvents    | Object Array | Inserts events to calendar | -- |
+| Method    | Parameters   | Action                     | Return                 |
+| --------- | ------------ | -------------------------- | ---------------------- |
+| render    | ID           | Render the calendar        | Returns public methods |
+| addEvents | Object Array | Inserts events to calendar | --                     |
 
 #### Changelog
 
- - v0.1 - initiated ;)
+- v0.1 - initiated ;)
 
 #### Current calendar style:
 
-![Current calendar style](./images/calendarJS_EN.png)
+![Current calendar style](./stylesheet/DefaultStyle/preview/calendarJS_EN.png)
 
 When you click on an event date:
 
-![Current calendar style](./images/specific_date_EN.png)
-
+![Current calendar style](./stylesheet/DefaultStyle/preview/specific_date_EN.png)
