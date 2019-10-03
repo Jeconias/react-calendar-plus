@@ -14,4 +14,5 @@ const filFIL = {
     "Nobyembre",
     "Disyembre"
   ]
-}
+};
+export default filFIL;
