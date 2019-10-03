@@ -4,7 +4,7 @@ This is a JavaScript calendar that is intended to be flexible for entering event
 
 #### How to use
 
-- Load [CalendarJS.js](./javascript/CalendarJS.js) and [DefaultStyle.css](./stylesheet/DefaultStyle/DefaultStyle.css) into your project.
+- Load [CalendarJS.js](./src/CalendarJS.js) and [DefaultStyle.css](./stylesheet/DefaultStyle/DefaultStyle.css) into your project.
 - Instantiate the CalendarJS class in your application and enter the div ID that will receive CalendarJS:
 
 ```
