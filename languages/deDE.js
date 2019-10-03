@@ -1,4 +1,4 @@
-const ptBr = {
+const deDE = {
   daysWeek: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
   months: [
     "Januar",
@@ -16,4 +16,4 @@ const ptBr = {
   ]
 };
 
-export default ptBr;
+export default deDE;
