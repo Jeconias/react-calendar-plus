@@ -11,14 +11,18 @@
       media="screen"
       href="./stylesheet/DefaultStyle/DefaultStyle.css"
     />
-    <title>Teste - Calendário JS</title>
+    <title>Calendar JS</title>
   </head>
+
   <body>
     <div class="calendar" id="calendar"></div>
   </body>
-  <script src="./javascript/CalendarJS.js"></script>
 
-  <script>
+  <!-- This is a simple way to show how to use -->
+  <script src="./src/CalendarJS.js"></script>
+  <script type="module">
+    import ptBr from "./languages/ptBr.js";
+
     const eventsDataBase = {
       events: [
         {
@@ -58,7 +62,7 @@
       ]
     };
 
-    let calendarJS = new Calendar();
+    let calendarJS = new Calendar({ lang: ptBr });
     calendarJS.render("#calendar").addEvents(eventsDataBase);
   </script>
 </html>
