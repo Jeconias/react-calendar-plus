@@ -501,7 +501,7 @@ let Calendar = (function() {
 
     this.container.dev = {
       name: "Jeconias Santos",
-      github: "jeconiassantos/calendarjs"
+      github: "jeconias/calendarjs"
     };
 
     this.container.tags.ids = {
