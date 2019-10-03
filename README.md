@@ -1,43 +1,42 @@
 # CalendarJS
 
-Esse é um calendário com JavaScript que tem como propósito ser fléxivel para a inserção de eventos ou lembretes em determinadas datas.
+This is a JavaScript calendar that is intended to be flexible for entering events or reminders on certain dates.
 
 
-#### Como utilizar
+#### How to use
 
-- Carregue o [CalendarJS.js](./javascript/CalendarJS.js) e [CalendarJS.css](./stylesheet/CalendarJS.css)
-no seu projeto.
-- Instancie a classe do CalendarJS na sua aplicação e insira o ID da div que irá receber o CalendarJS:
+- Load [CalendarJS.js](./javascript/CalendarJS.js) and [CalendarJS.css](./stylesheet/CalendarJS.css) into your project.
+- Instantiate the CalendarJS class in your application and enter the div ID that will receive CalendarJS:
 
 ```
     const calendarJS = new Calendar();
     calendarJS.render('#calendar'); 
 ```
 
-- Você pode inserir eventos utilizando o método **addEvents** dessa forma:
+- You can insert events using the **addEvents** method like this:
 
 ```
     calendarJS.addEvents(
     [
          {
             name    : 'DocePipoca',
-            data    : '17-3-2019',
-            hora    : '22:00',
-            autor   : 'Mario',
-            link    : 'link para o evento',
+            date    : '17-3-2019',
+            time    : '22:00',
+            author   : 'Mario',
+            link    : 'link to the event',
         },
          {
-            name    : 'Nome do Evento',
+            name    : 'Event Name',
             data    : '10-10-2018',
-            hora    : '07:00',
-            autor   : 'Jeconias',
-            link    : 'link para o evento',
+            time    : '07:00',
+            author   : 'Jeconias',
+            link    : 'link to the event',
         }
     ]);
 
 ```
 
-- Você pode renderizar o calendário antes ou depois de inserir os eventos:
+- You can render the calendar before or after entering events:
 
 ```
     const calendarJS = new Calendar();
@@ -49,22 +48,22 @@ no seu projeto.
 ```
 
 
-#### Métodos disponíveis
+#### Available Methods
 
-| Método | Parametros | Ação | Retorno |
+| Method | Parameters | Action | Return |
 |--------|------------|------|---------|
-|render       | ID     | Renderiza o calendário | Retorna os métodos públicos |
-|addEvents    | Array de Objetos | Insere os eventos no calendário | -- |
+|render       | ID     | Render the calendar | Returns public methods |
+|addEvents    | Object Array | Inserts events to calendar | -- |
 
 #### Changelog
 
  - v0.1 - initiated ;)
 
-#### Estilo atual do calendário:
+#### Current calendar style:
 
-![Estilo atual do calendário](./images/calendarJS.png)
+![Current calendar style](./images/calendarJS_EN.png)
 
-Ao clicar em alguma data com eventos:
+When you click on an event date:
 
-![Estilo atual do calendário](./images/specific_date.png)
+![Current calendar style](./images/specific_date_EN.png)
 
