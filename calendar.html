@@ -1,90 +1,64 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" type="text/css" media="screen" href="./stylesheet/CalendarJS.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="./stylesheet/CalendarJS.css"
+    />
     <title>Teste - Calendário JS</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="calendar" id="calendar"></div>
-        
-</body>
-<script src="./javascript/CalendarJS.js"></script>
+  </body>
+  <script src="./javascript/CalendarJS.js"></script>
 
-<script>
+  <script>
     const eventsDataBase = {
-        events: 
-        [
-            {
-                name    : 'Evento Chega Mais',
-                data    : '20-3-2019',
-                hora    : '18:00',
-                autor   : 'Mario',
-            },
-            {
-                name    : 'Quebrando Tudo',
-                data    : '20-3-2019',
-                hora    : '22:00',
-                autor   : 'Mario',
-                link    : '#a',
-            },
-            {
-                name    : 'O Evento é esse',
-                data    : '20-3-2019',
-                hora    : '22:30',
-                autor   : 'Mario',
-                link    : 'link para o evento',
-            },
-            {
-                name    : 'Edição Gamer',
-                data    : '20-3-2019',
-                hora    : '15:30',
-                autor   : 'Mario',
-                link    : 'link para o evento',
-            },
-
-            {
-                name    : 'Vem pegar o seu @',
-                data    : '20-3-2019',
-                hora    : '00:15',
-                autor   : 'Mario',
-                link    : 'link para o evento',
-            },
-
-            {
-                name    : 'Orgilandia',
-                data    : '20-3-2019',
-                hora    : '22:22',
-                autor   : 'Mario',
-                link    : 'link para o evento',
-            },
-
-            {
-                name    : 'ScrollBar',
-                data    : '20-3-2019',
-                hora    : '10:10',
-                autor   : 'Mario',
-                link    : 'link para o evento',
-            },
-
-            {
-                name    : 'DocePipoca',
-                data    : '17-3-2019',
-                hora    : '07:15',
-                autor   : 'Mario',
-                link    : 'link para o evento',
-            },
-            
-        ]
+      events: [
+        {
+          name: "Evento Chega Mais",
+          date: "2-9-2019",
+          time: "18:00",
+          author: "Mario"
+        },
+        {
+          name: "Festa 24H",
+          date: "10-9-2019",
+          time: "22:00",
+          author: "Mario",
+          link: "#test"
+        },
+        {
+          name: "O Evento é esse",
+          date: "10-9-2019",
+          time: "22:30",
+          author: "Mario",
+          link: "link para o evento"
+        },
+        {
+          name: "Edição Gamer",
+          date: "10-9-2019",
+          time: "15:30",
+          author: "Mario",
+          link: "link para o evento"
+        },
+        {
+          name: "DocePipoca",
+          date: "14-9-2019",
+          time: "07:15",
+          author: "Mario",
+          link: "link para o evento"
+        }
+      ]
     };
 
     let calendarJS = new Calendar();
-    calendarJS.render('#calendar').addEvents(eventsDataBase);
-
-</script>
-
+    calendarJS.render("#calendar").addEvents(eventsDataBase);
+  </script>
 </html>
