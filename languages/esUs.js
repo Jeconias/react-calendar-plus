@@ -1,4 +1,4 @@
-const ptBr = {
+const enUs = {
   daysWeek: ["Dom", "Lun", "Mar", "Mié", "Juv", "Vie", "Sáb"],
   months: [
     "Enero",
