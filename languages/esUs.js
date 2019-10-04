@@ -1,4 +1,4 @@
-const enUs = {
+const esUs = {
   daysWeek: ["Dom", "Lun", "Mar", "Mié", "Juv", "Vie", "Sáb"],
   months: [
     "Enero",
@@ -16,4 +16,4 @@ const enUs = {
   ]
 };
 
-export default enUs;
+export default esUs;
