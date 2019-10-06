@@ -16,4 +16,4 @@ const koKR = {
     ]
 };
 
-export default deDE;
+export default koKR;
