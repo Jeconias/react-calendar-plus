@@ -1,4 +1,4 @@
-const koKR = {
+const jaJP = {
     daysWeek: ["日", "月", "火", "水", "木", "金", "土"],
     months: [
         "一月",
@@ -16,4 +16,4 @@ const koKR = {
     ]
 };
 
-export default deDE;
+export default jaJP;
