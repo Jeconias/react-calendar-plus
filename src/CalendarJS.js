@@ -608,37 +608,32 @@
   };
 
   // METODO INIT QUE FAZ PAPEL DE CONSTRUTOR
-  Calendar.init = function(config) {
+  Calendar.init = () => {
     // CRIANDO OS OBJETOS NECESSARIOS
-    this.container = {};
+    let container = {};
     let paths = {
-      firstPath: ["lang", ["daysWeek", "months"], "array"],
-      secondPath: ["global", "object"],
-      thirdPath: ["dev", "object"],
-      fourPath: ["tags", ["ids", "classes"], "object"]
+      firstPath: ["tags", ["ids", "classes"], "object"]
     };
 
     // SIMPLES METODO PARA A CRIACAO DE PATHS DENTRO DO CONTAINER
     for (let p in paths) {
       if (paths[p].length > 1) {
-        if (this.container[paths[p][0]] === undefined)
-          this.container[paths[p][0]] = {};
-
+        if (container[paths[p][0]] === undefined) container[paths[p][0]] = {};
         for (let element in paths[p][1]) {
           if (paths[p][1] === "object") {
-            this.container[paths[p][0]] = {};
+            container[paths[p][0]] = {};
             continue;
           }
 
           if (paths[p][1] === "array") {
-            this.container[paths[p][0]] = [];
+            container[paths[p][0]] = [];
             continue;
           }
 
           if (paths[p][2] === "array") {
-            this.container[paths[p][0]][paths[p][1][element]] = [];
+            container[paths[p][0]][paths[p][1][element]] = [];
           } else {
-            this.container[paths[p][0]][paths[p][1][element]] = null;
+            container[paths[p][0]][paths[p][1][element]] = null;
           }
         }
       }
@@ -646,21 +641,21 @@
 
     let localDate = new Date();
 
-    this.container.global = {
+    container.global = {
       currentDate: localDate,
       currentYear: localDate.getFullYear(),
       currentMonth: localDate.getMonth(),
       currentDay: localDate.getDate()
     };
 
-    this.container.tags.ids = {
+    container.tags.ids = {
       eventDetails: "#eventDetails",
       calendarHeaderYear: "#calendarHeaderYear",
       calendarHeaderMonth: "#calendarHeaderMonth",
       hiddenDayEvents: "#hiddenDayEvents"
     };
 
-    this.container.tags.classes = {
+    container.tags.classes = {
       eventDetails: ".eventDetails",
       calendarEvent: ".calendarEvent",
       calendarBody: ".calendarBody",
@@ -668,7 +663,7 @@
       calendarActionAfter: ".calendarActionAfter"
     };
 
-    this.container.settings = this.container.settings || {
+    container.settings = container.settings || {
       show: false,
       language: {
         active: "enUS",
@@ -690,19 +685,19 @@
         ]
       },
       theme: {
-        active: "DefaultStyle",
-        available: ["DefaultStyle", "Night", "Royale"]
+        active: "Default",
+        available: ["Default", "Night", "Royale"]
       }
     };
 
     writeConsole("gitHub -> jeconias/calendarjs");
-    return new Calendar(this.container);
+    return new Calendar(container);
   };
 
-  return function(config = null) {
+  return function() {
     writeConsole("Loading...");
 
-    if (!instance) return (instance = new Calendar.init(config));
+    if (!instance) return (instance = new Calendar.init());
     return instance;
   };
 });
