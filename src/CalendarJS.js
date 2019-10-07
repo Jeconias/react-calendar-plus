@@ -642,7 +642,7 @@
         available: ["deDE", "enUS", "esUS", "filFIL", "idID", "inHI", "jaJP", "koKR", "myMY", "plPL", "ptBR", "ruRU", "srRS", "zhCN"]
       },
       theme: {
-        active: "Night",
+        active: "DefaultStyle",
         available: ["DefaultStyle", "Night", "Royale"]
       }
     };
