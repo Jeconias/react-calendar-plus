@@ -433,23 +433,7 @@
     };
 
     const defaultLanguage = () => {
-      this.container.lang = {
-        daysWeek: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        months: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ]
-      };
+        return require('./languages/enUS')
     };
 
     const changeLanguage = (lang = null) => {
