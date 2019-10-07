@@ -1,4 +1,4 @@
-const esUs = {
+module.exports = {
   daysWeek: ["Dom", "Lun", "Mar", "Mié", "Juv", "Vie", "Sáb"],
   months: [
     "Enero",
@@ -12,8 +12,6 @@ const esUs = {
     "Septiembre",
     "Octubre",
     "Noviembre",
-    "Diciembre",
+    "Diciembre"
   ]
 };
-
-export default esUs;

@@ -1,4 +1,4 @@
-const filFIL = {
+module.exports = {
   daysWeek: ["Lin", "Lun", "Mar", "Miy", "Huw", "Biy", "Sab"],
   months: [
     "Enero",
@@ -15,4 +15,3 @@ const filFIL = {
     "Disyembre"
   ]
 };
-export default filFIL;

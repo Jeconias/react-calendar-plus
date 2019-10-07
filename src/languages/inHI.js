@@ -1,5 +1,13 @@
-const inHI = {
-  daysWeek: ["Ravivar", "Somvar", "Mangalvar", "Budhvar", "Guruvar", "Shukravar", "Shanivar"],
+module.exports = {
+  daysWeek: [
+    "Ravivar",
+    "Somvar",
+    "Mangalvar",
+    "Budhvar",
+    "Guruvar",
+    "Shukravar",
+    "Shanivar"
+  ],
   months: [
     "Janvari",
     "Farvari",
@@ -15,5 +23,3 @@ const inHI = {
     "Disambar"
   ]
 };
-
-export default inHi;

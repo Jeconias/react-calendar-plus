@@ -1,4 +1,4 @@
-const deDE = {
+module.exports = {
   daysWeek: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
   months: [
     "Januar",
@@ -15,5 +15,3 @@ const deDE = {
     "Dezember"
   ]
 };
-
-export default deDE;

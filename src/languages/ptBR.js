@@ -1,4 +1,4 @@
-const ptBr = {
+module.exports = {
   daysWeek: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
   months: [
     "Janeiro",
@@ -15,5 +15,3 @@ const ptBr = {
     "Dezembro"
   ]
 };
-
-export default ptBr;

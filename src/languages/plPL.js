@@ -1,4 +1,4 @@
-const plPL = {
+module.exports = {
   daysWeek: ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Nd"],
   months: [
     "Styczeń",
@@ -15,5 +15,3 @@ const plPL = {
     "Grudzień"
   ]
 };
-
-export default plPL;

@@ -4,29 +4,25 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    <title>Calendar JS</title>
     <link
       rel="stylesheet"
       type="text/css"
       media="screen"
-      href="./stylesheet/DefaultStyle/DefaultStyle.css"
+      href="./src/themes/DefaultStyle/DefaultStyle.css"
     />
-    <title>Calendar JS</title>
   </head>
 
   <body>
     <div class="calendar" id="calendar"></div>
   </body>
 
-  <!-- This is a simple way to show how to use -->
-  <script src="./src/CalendarJS.js"></script>
+  <script src="./dev/calendarjs-dev.js"></script>
   <script type="module">
-    import ptBr from "./languages/ptBr.js";
-
     const eventsDataBase = {
       events: [
         {
-          name: "Evento Chega Mais",
+          name: "Event Name",
           date: "2-9-2019",
           time: "18:00",
           author: "Mario"
@@ -61,8 +57,10 @@
         }
       ]
     };
-
-    let calendarJS = new Calendar({ lang: ptBr });
-    calendarJS.render("#calendar").addEvents(eventsDataBase);
+    const calendar = new CalendarJS();
+    calendar
+      .render("#calendar")
+      .lang("ptBR") // deDE, jaJP, srRC and more.
+      .addEvents(eventsDataBase);
   </script>
 </html>

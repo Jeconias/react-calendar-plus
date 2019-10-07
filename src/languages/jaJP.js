@@ -1,5 +1,5 @@
-const zhCN = {
-  daysWeek: ["周日", "周二", "周三", "周四", "周五", "周六"],
+module.exports = {
+  daysWeek: ["日", "月", "火", "水", "木", "金", "土"],
   months: [
     "一月",
     "二月",
@@ -15,5 +15,3 @@ const zhCN = {
     "十二月"
   ]
 };
-
-export default zhCN;
