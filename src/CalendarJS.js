@@ -189,6 +189,10 @@
     };
 
     const renderContainer = () => {
+
+      // INITIALLY CHANGE COLOR THEME
+      changeColorTheme();
+
       // SELECIONAR O CONTAINER DO CALENDARIO
       selector(this.container.tags.ids.calendarContainer);
 
@@ -521,16 +525,27 @@
     };
 
     const changeColorTheme = (theme = null) => {
+
       if (
-          theme === null
-          || !this.container.settings.theme.available.includes(theme)
+          theme !== null
+          && !this.container.settings.theme.available.includes(theme)
       ) {
         return;
       }
-
-      const cssFile = document.querySelector('link');
+      let cssThemeLink = document.querySelector('#calendarThemeCSS');
+      if (!cssThemeLink) {
+        cssThemeLink = document.createElement('link');
+        cssThemeLink.rel = 'stylesheet';
+        cssThemeLink.type = 'text/css';
+        cssThemeLink.id = 'calendarThemeCSS';
+        const headElement = document.getElementsByTagName('head')[0];
+        headElement.appendChild(cssThemeLink)
+      }
+      if (theme === null) {
+        theme = this.container.settings.theme.active
+      }
       const linkToNewFile = `./src/themes/${theme}/${theme}.css`;
-      cssFile.href = linkToNewFile;
+      cssThemeLink.href = linkToNewFile;
       this.container.settings.theme.active = theme;
       writeConsole("Theme is now " + theme)
     };
