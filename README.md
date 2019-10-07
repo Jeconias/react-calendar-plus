@@ -4,7 +4,7 @@ This is a JavaScript calendar that is intended to be flexible for entering event
 
 #### How to use
 
-- Load [CalendarJS.js](./src/CalendarJS.js) and [DefaultStyle.css](./stylesheet/DefaultStyle/DefaultStyle.css) into your project.
+- Load [CalendarJS.js](./dist/calendarjs.min.js) and [DefaultStyle.css](./src/themes/DefaultStyle/DefaultStyle.css) into your project.
 - Instantiate the CalendarJS class in your application and enter the div ID that will receive CalendarJS:
 
 ```
@@ -38,29 +38,26 @@ This is a JavaScript calendar that is intended to be flexible for entering event
 - You can render the calendar before or after entering events:
 
 ```
-    const calendarJS = new Calendar();
-    calendarJS.render('#calendar').addEvents(arrayObj);
-
-    // ou
-
-    calendarJS.addEvents(arrayObj).render('#calendar');
+    const calendar = new CalendarJS();
+    calendar.render("#calendar").lang("ptBR").addEvents(arrayObj);
 ```
 
 #### Available Methods
 
 | Method    | Parameters   | Action                     | Return                 |
 | --------- | ------------ | -------------------------- | ---------------------- |
-| render    | ID           | Render the calendar        | Returns public methods |
 | addEvents | Object Array | Inserts events to calendar | --                     |
+| lang      | string       | Change language            | Returns public methods |
+| render    | string       | Render the calendar        | Returns public methods |
 
 #### Changelog
 
-- v0.1 - initiated ;)
+- v1.0.0 - initiated ;)
 
 #### Current calendar style:
 
-![Current calendar style](./stylesheet/DefaultStyle/preview/calendarJS_EN.png)
+![Current calendar style](./src/themes/DefaultStyle/preview/defaultThemeLang-myMY.png)
 
 When you click on an event date:
 
-![Current calendar style](./stylesheet/DefaultStyle/preview/specific_date_EN.png)
+![Current calendar style](./src/themes/DefaultStyle/preview/defaultThemeLang-myMY-list.png)
