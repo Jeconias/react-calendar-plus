@@ -1,6 +1,21 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i');
 
+.calendar {
+    --primary-background-color: #fff;
+    --secondary-background-color: #1A363F;
+    --primary-highlight-color: #FE623E;
+    --primary-date-highlight-color: #27ae60;
+    --secondary-date-highlight-color: #eee;
+    --primary-font-color: #858885;
+    --primary-inverted-font-color: #f1f1f1;
+    --primary-border-color: #eee;
+    --scrollbar-background-color: #ededed;
+    --scrollbar-thumb-color: #dcdbdb;
+    --scrollbar-hover-color: #b3b3b3;
+}
+
+
 .calendar * {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
@@ -15,8 +30,8 @@
 .calendar {
     width: 300px;
     margin: 0 auto;
-    background-color: #1A363F;
-    border: 1px solid #EEEEEE;
+    background-color: var(--secondary-background-color);
+    border: 1px solid var(--primary-border-color);
     border-radius: 5px;
     overflow: hidden;
     position: relative;
@@ -27,7 +42,7 @@
     top: -40px;
     width: 100%;
     height: 123%;
-    background-color: #fff;
+    background-color: var(--primary-background-color);
     z-index: 2;
     transition: 0.5s;
     transform: translateX(-100%);
@@ -66,7 +81,7 @@
 .eventDetails > div:first-child span:first-child:hover,
 #settingsContainer > div:first-child span:first-child:hover{
     border-color: transparent;
-    background-color: #FE623E;
+    background-color: var(--primary-highlight-color);
 }
 
 .eventDetails > div:first-child span:first-child::before,
@@ -77,7 +92,7 @@
     background-color: transparent;
     border: 0;
     border-style: solid;
-    border-color: #444;
+    border-color: var(--primary-highlight-color);
     border-left-width: 2px;
     border-top-width: 2px;
     transform: rotate(-45deg) translate(2px, -2px);
@@ -86,8 +101,9 @@
 
 }
 
-.eventDetails > div:first-child span:hover::before {
-    border-color: #fff;
+.eventDetails > div:first-child span:hover::before,
+#settingsContainer > div:first-child span:hover::before{
+    border-color: var(--primary-inverted-font-color);
 }
 
 .eventDetails > ul {
@@ -104,17 +120,17 @@
 }
 
 .eventDetails > ul::-webkit-scrollbar-track {
-    background: #EDEDED;
+    background: var(--scrollbar-background-color);
   }
 
 .eventDetails > ul::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #dcdbdb;
+    background: var(--scrollbar-thumb-color);
     transition: 0.5s;
 }
 
 .eventDetails > ul::-webkit-scrollbar-thumb:hover {
-    background: #b3b3b3;
+    background: var(--scrollbar-hover-color);
     width: 20px;
 }
 
@@ -123,14 +139,14 @@
     margin-top: 5px;
     padding: 5px 8px;
     list-style: none;
-    background-color: #fe623edb;
+    background-color: var(--primary-highlight-color);
     text-align: left;
     font-size: 0.9em;
 }
 
 .eventDetails a {
     text-decoration: none;
-    color: #fff;
+    color: var(--primary-inverted-font-color);
     font-weight: 600;
     font-size: 0.8em;
     cursor: pointer;
@@ -138,7 +154,7 @@
 }
 
 .eventDetails a:hover {
-    color: #1A363F;
+    color: var(--secondary-background-color);
 }
 
 /* Settings */
@@ -192,7 +208,7 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 2px solid #fff;
+    border: 2px solid var(--primary-border-color);
     background-color: transparent;
     cursor: pointer;
     transition: 0.3s;
@@ -203,12 +219,12 @@
 }
 
 .calendarActionBefore:hover, .calendarActionAfter:hover {
-    background-color: #FE623E;
+    background-color: var(--primary-highlight-color);
     border-color: transparent;
 }
 
 .calendarActionBefore:hover > i, .calendarActionAfter:hover > i {
-    border-color: #fff;
+    border-color: var(--primary-border-color);
 }
 
 .calendarActionBefore > i, .calendarActionAfter > i {
@@ -217,7 +233,7 @@
     background-color: transparent;
     border: 0;
     border-style: solid;
-    border-color: #fff;
+    border-color: var(--primary-border-color);
     border-left-width: 2px;
     border-top-width: 2px;
     transform: rotate(-45deg);
@@ -229,7 +245,7 @@
 }
 
 .calendarHeader > div:first-child h1 {
-    color: #F8FDFF;
+    color: var(--primary-inverted-font-color);
     text-transform: uppercase;
     font-size: 1.2em;
     margin-left: 5px;
@@ -238,7 +254,7 @@
 }
 
 .calendar > div:first-child span {
-    color: #F8FDFF;
+    color: var(--primary-inverted-font-color);
     font-size: 1.1em;
     font-weight: 500;
 }
@@ -251,13 +267,12 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     padding-top: 10px;
-    color: #444;
     font-weight: 600;
 }
 
 .calendarDaysWeek > ul > li:first-child {
     font-weight: 600;
-    color: #444;
+    color: var(--secondary-background-color);
 }
 
 .calendarDaysWeek > ul li {
@@ -265,18 +280,18 @@
     text-align: center;
     margin-bottom: 7px;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--primary-inverted-font-color);
     font-size: 0.8em;
 }
 
 .calendarDaysWeek > ul, .calendarBody {
     padding-left: 15px;
     padding-right: 15px;
-    background-color: #fff;
+    background-color: var(--primary-background-color);
 }
 
 .calendarDaysWeek > ul {
-    background-color: #FE623E;
+    background-color: var(--primary-highlight-color);
 }
 
 .calendarBody {
@@ -293,12 +308,12 @@
 
 .calendarBody > span {
     font-weight: 600;
-    color: #858885;
+    color: var(--primary-font-color);
     font-size: 0.7em;
 }
 
 .calendarLastAndNextMonth {
-    color: rgba(68, 68, 68, 0.5) !important;
+    filter: invert(1) brightness(1.25);
 }
 
 .calendarToday, .calendarEvent {
@@ -314,13 +329,13 @@
     padding: 5px;
     box-sizing: content-box;
     border: 1px solid transparent;
-    background-color: #EEEEEE;
+    background-color: var(--secondary-date-highlight-color);
     border-radius: 50%;
-    color: #858885;
+    color: var(--primary-font-color);
 }
 
 .calendarEvent > span {
-    background-color: #27ae60;
-    color: #f2f2f2;
+    background-color: var(--primary-date-highlight-color);
+    color: var(--primary-inverted-font-color);
     cursor: pointer;
 }
