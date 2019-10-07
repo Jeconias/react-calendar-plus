@@ -1,15 +1,17 @@
 (function(window, factory) {
   if (typeof exports === "object") {
-    module.exports = factory(window);
+    module.exports = factory();
   } else {
-    window.CalendarJS = factory(window);
+    window.CalendarJS = factory();
   }
-})(window, function(window) {
+})(window, function() {
   "use strict";
   let instance;
   const projectName = "Calendar";
 
-  // Function main
+  /**
+   * Function main
+   */
   let Calendar = function(container) {
     this.container = container;
     this.selected = null;
@@ -20,7 +22,9 @@
       clientY: 0
     };
 
-    // Check if the year is leap
+    /**
+     * Check if the year is leap
+     */
     const leap = () => {
       return (
         this.container.global.currentYear % 100 !== 0 &&
@@ -28,7 +32,9 @@
       );
     };
 
-    // Return first day of month
+    /**
+     * Return first day of month
+     */
     const firstDayMonth = () => {
       const primeiroDiaMes = new Date(
         this.container.global.currentYear,
@@ -38,7 +44,9 @@
       return primeiroDiaMes.getDay();
     };
 
-    // QUANDO O MES FOR IGUAL A 0, VOLTAR PARA 11 E RETROCEDER UM ANO
+    /**
+     * when month is equal to 0, return to 11 and return a year
+     */
     const lastMonth = () => {
       if (this.container.global.currentMonth != 0) {
         this.container.global.currentMonth--;
@@ -50,7 +58,7 @@
       return;
     };
 
-    // QUADO O MES FOR IGUAL A 11, VOLTAR PARA 0 E AVANCAR UM ANO
+    // when month is 11, return to 0 and advance one year
     const nextMonth = () => {
       if (this.container.global.currentMonth != 11) {
         this.container.global.currentMonth++;
@@ -93,7 +101,7 @@
       }
     };
 
-    // SETA UMA NOVA DATA
+    // Set new date
     const newDate = () => {
       this.container.global.currentDate.setFullYear(
         this.container.global.currentYear,
@@ -114,7 +122,6 @@
       // Load events
       addCalendarEvent();
 
-      // RECARREGAR O EVENTO PARA FECHAR OS DETALHES
       eventNew(
         this.container.tags.ids.hiddenDayEvents,
         "click",
@@ -189,7 +196,6 @@
     };
 
     const renderContainer = () => {
-
       // INITIALLY CHANGE COLOR THEME
       changeColorTheme();
 
@@ -300,7 +306,8 @@
       backButton.className = "backButton";
 
       const settingsHeaderTitle = document.createElement("span");
-      settingsHeaderTitle.innerText = this.container.lang.settings.settings || "Settings";
+      settingsHeaderTitle.innerText =
+        this.container.lang.settings.settings || "Settings";
 
       settingsHeaderContainer.appendChild(backButton);
       settingsHeaderContainer.appendChild(settingsHeaderTitle);
@@ -309,8 +316,14 @@
       settingsBodyContainer.className = "settingsBody";
       settingsBodyContainer.appendChild(ThemeSetting());
 
-      settingsButton.addEventListener('click', () => settingsContainer.style.transform = "translateX(0%)");
-      backButton.addEventListener('click', () => settingsContainer.style.transform = "translateX(-100%)");
+      settingsButton.addEventListener(
+        "click",
+        () => (settingsContainer.style.transform = "translateX(0%)")
+      );
+      backButton.addEventListener(
+        "click",
+        () => (settingsContainer.style.transform = "translateX(-100%)")
+      );
 
       settingsContainer.appendChild(settingsHeaderContainer);
       settingsContainer.appendChild(settingsBodyContainer);
@@ -325,19 +338,25 @@
       const settingContainer = document.createElement("div");
 
       const selectTitle = document.createElement("span");
-      selectTitle.innerText = this.container.lang.settings.theme || "Color Theme";
+      selectTitle.innerText =
+        this.container.lang.settings.theme || "Color Theme";
 
       const selectItem = document.createElement("select");
       selectItem.name = "theme";
       selectItem.id = "theme-select";
 
       const options = themes.map(
-          value => `<option value="${value}" ${activeTheme === value ? 'selected' : ''}>${value}</option>`
+        value =>
+          `<option value="${value}" ${
+            activeTheme === value ? "selected" : ""
+          }>${value}</option>`
       );
 
       selectItem.innerHTML = options;
 
-      selectItem.addEventListener("change", ev => changeColorTheme(ev.target.value));
+      selectItem.addEventListener("change", ev =>
+        changeColorTheme(ev.target.value)
+      );
 
       settingContainer.appendChild(selectTitle);
       settingContainer.appendChild(selectItem);
@@ -501,11 +520,11 @@
 
     const showSettings = (val = null) => {
       this.container.settings.show = val !== null ? val : true;
-        return methodsPublic;
+      return methodsPublic;
     };
 
     const defaultLanguage = () => {
-        return require('./languages/enUS')
+      return require("./languages/enUS");
     };
 
     const changeLanguage = (lang = null) => {
@@ -525,29 +544,28 @@
     };
 
     const changeColorTheme = (theme = null) => {
-
       if (
-          theme !== null
-          && !this.container.settings.theme.available.includes(theme)
+        theme !== null &&
+        !this.container.settings.theme.available.includes(theme)
       ) {
         return;
       }
-      let cssThemeLink = document.querySelector('#calendarThemeCSS');
+      let cssThemeLink = document.querySelector("#calendarThemeCSS");
       if (!cssThemeLink) {
-        cssThemeLink = document.createElement('link');
-        cssThemeLink.rel = 'stylesheet';
-        cssThemeLink.type = 'text/css';
-        cssThemeLink.id = 'calendarThemeCSS';
-        const headElement = document.getElementsByTagName('head')[0];
-        headElement.appendChild(cssThemeLink)
+        cssThemeLink = document.createElement("link");
+        cssThemeLink.rel = "stylesheet";
+        cssThemeLink.type = "text/css";
+        cssThemeLink.id = "calendarThemeCSS";
+        const headElement = document.getElementsByTagName("head")[0];
+        headElement.appendChild(cssThemeLink);
       }
       if (theme === null) {
-        theme = this.container.settings.theme.active
+        theme = this.container.settings.theme.active;
       }
       const linkToNewFile = `./src/themes/${theme}/${theme}.css`;
       cssThemeLink.href = linkToNewFile;
       this.container.settings.theme.active = theme;
-      writeConsole("Theme is now " + theme)
+      writeConsole("Theme is now " + theme);
     };
 
     // PUBLIC METHODS FOR THE USER
@@ -654,7 +672,22 @@
       show: false,
       language: {
         active: "enUS",
-        available: ["deDE", "enUS", "esUS", "filFIL", "idID", "inHI", "jaJP", "koKR", "myMY", "plPL", "ptBR", "ruRU", "srRS", "zhCN"]
+        available: [
+          "deDE",
+          "enUS",
+          "esUS",
+          "filFIL",
+          "idID",
+          "inHI",
+          "jaJP",
+          "koKR",
+          "myMY",
+          "plPL",
+          "ptBR",
+          "ruRU",
+          "srRS",
+          "zhCN"
+        ]
       },
       theme: {
         active: "DefaultStyle",
@@ -668,16 +701,6 @@
 
   return function(config = null) {
     writeConsole("Loading...");
-
-    if (
-      (config != null &&
-        typeof config === "object" &&
-        Array.isArray(config) === true) ||
-      (config != null && typeof config !== "object")
-    ) {
-      writeConsole("The constructor parameter must be a valid Object");
-      return;
-    }
 
     if (!instance) return (instance = new Calendar.init(config));
     return instance;
