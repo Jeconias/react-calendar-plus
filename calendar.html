@@ -5,12 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Calendar JS</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      media="screen"
-      href="./src/themes/DefaultStyle/DefaultStyle.css"
-    />
   </head>
 
   <body>
@@ -60,7 +54,9 @@
     const calendar = new CalendarJS();
     calendar
       .render("#calendar")
-      .lang("ptBR") // deDE, jaJP, srRC and more.
+      .lang("enUS") // deDE, jaJP, srRC and more.
+      .showSettings(true)
       .addEvents(eventsDataBase);
+
   </script>
 </html>

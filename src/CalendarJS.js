@@ -189,6 +189,10 @@
     };
 
     const renderContainer = () => {
+
+      // INITIALLY CHANGE COLOR THEME
+      changeColorTheme();
+
       // SELECIONAR O CONTAINER DO CALENDARIO
       selector(this.container.tags.ids.calendarContainer);
 
@@ -278,6 +282,68 @@
       return eventsContainer;
     };
 
+    const renderSettings = () => {
+      const settings = this.container.settings;
+
+      const settingsButton = document.createElement("div");
+      settingsButton.id = "settingsButton";
+      if (settings.show) {
+        document.getElementById("calendar").appendChild(settingsButton);
+      }
+
+      const settingsContainer = document.createElement("div");
+      settingsContainer.id = "settingsContainer";
+
+      const settingsHeaderContainer = document.createElement("div");
+
+      const backButton = document.createElement("span");
+      backButton.className = "backButton";
+
+      const settingsHeaderTitle = document.createElement("span");
+      settingsHeaderTitle.innerText = this.container.lang.settings.settings || "Settings";
+
+      settingsHeaderContainer.appendChild(backButton);
+      settingsHeaderContainer.appendChild(settingsHeaderTitle);
+
+      const settingsBodyContainer = document.createElement("div");
+      settingsBodyContainer.className = "settingsBody";
+      settingsBodyContainer.appendChild(ThemeSetting());
+
+      settingsButton.addEventListener('click', () => settingsContainer.style.transform = "translateX(0%)");
+      backButton.addEventListener('click', () => settingsContainer.style.transform = "translateX(-100%)");
+
+      settingsContainer.appendChild(settingsHeaderContainer);
+      settingsContainer.appendChild(settingsBodyContainer);
+
+      return settingsContainer;
+    };
+
+    const ThemeSetting = () => {
+      const themes = this.container.settings.theme.available;
+      const activeTheme = this.container.settings.theme.active;
+
+      const settingContainer = document.createElement("div");
+
+      const selectTitle = document.createElement("span");
+      selectTitle.innerText = this.container.lang.settings.theme || "Color Theme";
+
+      const selectItem = document.createElement("select");
+      selectItem.name = "theme";
+      selectItem.id = "theme-select";
+
+      const options = themes.map(
+          value => `<option value="${value}" ${activeTheme === value ? 'selected' : ''}>${value}</option>`
+      );
+
+      selectItem.innerHTML = options;
+
+      selectItem.addEventListener("change", ev => changeColorTheme(ev.target.value));
+
+      settingContainer.appendChild(selectTitle);
+      settingContainer.appendChild(selectItem);
+      return settingContainer;
+    };
+
     const renderBody = callback => {
       const totalDaysInt = totalDays();
       const totalDaysIntLastMonth = totalDays(
@@ -318,6 +384,7 @@
       body.className = this.container.tags.classes.calendarBody.substring(1);
       body.innerHTML = renderStr;
       body.appendChild(renderEventsDetails());
+      body.appendChild(renderSettings());
       //body.style.transform = 'translateY(0%)';
 
       // VERIFICAR SE O BODY JÁ EXISTE
@@ -432,24 +499,13 @@
       return methodsPublic;
     };
 
+    const showSettings = (val = null) => {
+      this.container.settings.show = val !== null ? val : true;
+        return methodsPublic;
+    };
+
     const defaultLanguage = () => {
-      this.container.lang = {
-        daysWeek: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        months: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "August",
-          "September",
-          "October",
-          "November",
-          "December"
-        ]
-      };
+        return require('./languages/enUS')
     };
 
     const changeLanguage = (lang = null) => {
@@ -468,11 +524,38 @@
       return methodsPublic;
     };
 
-    // METODOS PUBLICOS PARA O USUARIO
+    const changeColorTheme = (theme = null) => {
+
+      if (
+          theme !== null
+          && !this.container.settings.theme.available.includes(theme)
+      ) {
+        return;
+      }
+      let cssThemeLink = document.querySelector('#calendarThemeCSS');
+      if (!cssThemeLink) {
+        cssThemeLink = document.createElement('link');
+        cssThemeLink.rel = 'stylesheet';
+        cssThemeLink.type = 'text/css';
+        cssThemeLink.id = 'calendarThemeCSS';
+        const headElement = document.getElementsByTagName('head')[0];
+        headElement.appendChild(cssThemeLink)
+      }
+      if (theme === null) {
+        theme = this.container.settings.theme.active
+      }
+      const linkToNewFile = `./src/themes/${theme}/${theme}.css`;
+      cssThemeLink.href = linkToNewFile;
+      this.container.settings.theme.active = theme;
+      writeConsole("Theme is now " + theme)
+    };
+
+    // PUBLIC METHODS FOR THE USER
     const methodsPublic = {
       render: saverCalendarContainer,
       lang: changeLanguage,
-      addEvents: addCalendarEvent
+      addEvents: addCalendarEvent,
+      showSettings: showSettings
     };
 
     writeConsole("Finished.");
@@ -565,6 +648,18 @@
       calendarBody: ".calendarBody",
       calendarActionBefore: ".calendarActionBefore",
       calendarActionAfter: ".calendarActionAfter"
+    };
+
+    this.container.settings = this.container.settings || {
+      show: false,
+      language: {
+        active: "enUS",
+        available: ["deDE", "enUS", "esUS", "filFIL", "idID", "inHI", "jaJP", "koKR", "myMY", "plPL", "ptBR", "ruRU", "srRS", "zhCN"]
+      },
+      theme: {
+        active: "DefaultStyle",
+        available: ["DefaultStyle", "Night", "Royale"]
+      }
     };
 
     writeConsole("gitHub -> jeconias/calendarjs");

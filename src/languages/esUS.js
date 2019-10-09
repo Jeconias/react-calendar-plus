@@ -13,5 +13,9 @@ module.exports = {
     "Octubre",
     "Noviembre",
     "Diciembre"
-  ]
+  ],
+  settings: {
+    settings: "Settings",
+    theme: "Color Theme"
+  },
 };

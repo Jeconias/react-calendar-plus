@@ -13,5 +13,9 @@ module.exports = {
     "시월",
     "십일월",
     "십이월"
-  ]
+  ],
+  settings: {
+    settings: "Settings",
+    theme: "Color Theme"
+  },
 };
