@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Calendar JS</title>
   </head>
-
+  <link rel="stylesheet" href="src/themes/BaseStyle/CalendarBaseStyle.css" />
   <body>
     <div class="calendar" id="calendar"></div>
   </body>
@@ -51,12 +51,8 @@
         }
       ]
     };
-    const calendar = new CalendarJS();
-    calendar
-      .render("#calendar")
-      .lang("enUS") // deDE, jaJP, srRC and more.
-      .showSettings(true)
-      .addEvents(eventsDataBase);
-
+    const calendar = CalendarJS();
+    console.log(calendar);
+    calendar.container("calendar");
   </script>
 </html>

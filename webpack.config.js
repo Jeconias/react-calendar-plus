@@ -1,20 +1,21 @@
 const path = require("path");
 
 const base = {
-  entry: "./src/CalendarJS.js",
+  entry: "./src/index.ts",
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"]
-          }
-        }
+        test: /\.(ts)$/,
+        loader: "babel-loader"
+      },
+      {
+        test: /\.js$/,
+        use: ["source-map-loader"]
       }
     ]
+  },
+  resolve: {
+    extensions: [".js", ".jsx", ".tsx", ".ts", ".json"]
   }
 };
 
