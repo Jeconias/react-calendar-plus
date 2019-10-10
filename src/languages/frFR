@@ -1,5 +1,5 @@
 module.exports = {
-  daysWeek: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Dim"],
+  daysWeek: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
   months: [
     "Janvier",
     "Février",
