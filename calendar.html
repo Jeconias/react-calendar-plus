@@ -13,46 +13,26 @@
 
   <script src="./dev/calendarjs-dev.js"></script>
   <script type="module">
-    const eventsDataBase = {
-      events: [
-        {
-          name: "Event Name",
-          date: "2-9-2019",
-          time: "18:00",
-          author: "Mario"
-        },
-        {
-          name: "Festa 24H",
-          date: "10-9-2019",
-          time: "22:00",
-          author: "Mario",
-          link: "#test"
-        },
-        {
-          name: "O Evento é esse",
-          date: "10-9-2019",
-          time: "22:30",
-          author: "Mario",
-          link: "link para o evento"
-        },
-        {
-          name: "Edição Gamer",
-          date: "10-9-2019",
-          time: "15:30",
-          author: "Mario",
-          link: "link para o evento"
-        },
-        {
-          name: "DocePipoca",
-          date: "14-9-2019",
-          time: "07:15",
-          author: "Mario",
-          link: "link para o evento"
-        }
-      ]
-    };
+    const eventsDataBase = [
+      {
+        name: "Event Name",
+        date: "10-10-2019",
+        time: "18:00",
+        author: "Mario"
+      },
+      {
+        name: "Event Name",
+        date: "29-9-2019",
+        time: "18:00",
+        author: "Mario"
+      }
+    ];
     const calendar = CalendarJS();
     console.log(calendar);
-    calendar.container("calendar");
+    calendar
+      .container("#calendar")
+      .data(eventsDataBase)
+      .lang("ptBR")
+      .render();
   </script>
 </html>

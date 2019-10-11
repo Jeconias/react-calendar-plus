@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const ptBR: Language = {
   daysWeek: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
   months: [
     "Janeiro",
@@ -13,9 +15,7 @@ module.exports = {
     "Outubro",
     "Novembro",
     "Dezembro"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = ptBR;

@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const myMY: Language = {
   daysWeek: ["Ahad", "Isn", "Sel", "Rab", "Kha", "Jum", "Sab"],
   months: [
     "Januari",
@@ -13,9 +15,7 @@ module.exports = {
     "Oktober",
     "November",
     "Disember"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = myMY;

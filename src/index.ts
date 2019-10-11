@@ -1,1 +1,1 @@
-module.exports = require("./calendar/CalendarJS.ts").default;
+module.exports = require("./calendar/index.ts").default;

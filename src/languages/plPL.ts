@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const plPL: Language = {
   daysWeek: ["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Nd"],
   months: [
     "Styczeń",
@@ -13,9 +15,7 @@ module.exports = {
     "Październik",
     "Listopad",
     "Grudzień"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = plPL;

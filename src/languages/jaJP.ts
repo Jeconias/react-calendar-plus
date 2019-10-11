@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const jaPL: Language = {
   daysWeek: ["日", "月", "火", "水", "木", "金", "土"],
   months: [
     "一月",
@@ -13,9 +15,7 @@ module.exports = {
     "十月",
     "十一月",
     "十二月"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = jaPL;

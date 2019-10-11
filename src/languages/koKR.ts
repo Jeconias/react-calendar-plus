@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const koKR: Language = {
   daysWeek: ["일", "월", "화", "수", "목", "금", "토"],
   months: [
     "일월",
@@ -13,9 +15,7 @@ module.exports = {
     "시월",
     "십일월",
     "십이월"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = koKR;

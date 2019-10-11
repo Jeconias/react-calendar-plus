@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const filFil: Language = {
   daysWeek: ["Lin", "Lun", "Mar", "Miy", "Huw", "Biy", "Sab"],
   months: [
     "Enero",
@@ -13,9 +15,7 @@ module.exports = {
     "Oktubre",
     "Nobyembre",
     "Disyembre"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = filFil;

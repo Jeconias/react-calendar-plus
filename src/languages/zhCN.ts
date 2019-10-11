@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const zhCN: Language = {
   daysWeek: ["周日", "周二", "周三", "周四", "周五", "周六"],
   months: [
     "一月",
@@ -13,9 +15,7 @@ module.exports = {
     "十月",
     "十一月",
     "十二月"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = zhCN;

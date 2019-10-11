@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const srSR: Language = {
   daysWeek: ["Ned", "Pon", "Uto", "Sre", "Čet", "Pet", "Sub"],
   months: [
     "Januar",
@@ -13,9 +15,7 @@ module.exports = {
     "Oktobar",
     "Novembar",
     "Decembar"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = srSR;

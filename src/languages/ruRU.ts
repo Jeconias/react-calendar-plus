@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const ruRU: Language = {
   daysWeek: ["Вск", "Пнд", "Втр", "Срд", "Чтв", "Птн", "Сбт"],
   months: [
     "Январь",
@@ -13,9 +15,7 @@ module.exports = {
     "Октябрь",
     "Ноябрь",
     "Декабрь"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = ruRU;

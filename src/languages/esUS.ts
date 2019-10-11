@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const esUS: Language = {
   daysWeek: ["Dom", "Lun", "Mar", "Mié", "Juv", "Vie", "Sáb"],
   months: [
     "Enero",
@@ -13,9 +15,7 @@ module.exports = {
     "Octubre",
     "Noviembre",
     "Diciembre"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = esUS;

@@ -3,7 +3,12 @@ type TouchesPosition = {
   clientY: number;
 };
 
-type Language =
+type Language = {
+  daysWeek: string[];
+  months: string[];
+};
+
+type Languages =
   | "deDE"
   | "enUS"
   | "esUS"
@@ -19,7 +24,7 @@ type Language =
   | "srRS"
   | "zhCN";
 
-type Theme = "Default" | "Night" | "Royale";
+type LoadThemeParam = "Default" | "Night" | "Royale";
 
 type CalendarContainer = {
   localDate: {
@@ -42,6 +47,7 @@ type CalendarContainer = {
     classes: {
       eventDetails: string;
       calendarEvent: string;
+      calendarHeader: string;
       calendarBody: string;
       calendarActionBefore: string;
       calendarActionAfter: string;
@@ -50,18 +56,15 @@ type CalendarContainer = {
   settings: {
     show: boolean;
     language: {
-      active: Language;
-      available: Language[];
+      active: Languages;
+      available: Languages[];
     };
     theme: {
-      active: Theme;
-      available: Theme[];
+      active: LoadThemeParam;
+      available: LoadThemeParam[];
     };
   };
 };
-
-type languages = (lang: Language) => MethodsPublic;
-type themes = (lang: Theme) => MethodsPublic;
 
 type CalendarData = {
   name: string;
@@ -74,8 +77,9 @@ type CalendarData = {
 type MethodsPublic = {
   container: Function;
   data: Function;
-  lang: languages;
-  theme: themes;
+  lang: Function;
+  theme: Function;
+  render: Function;
 };
 
 type calendarConfig = {
@@ -87,5 +91,7 @@ export {
   MethodsPublic,
   CalendarContainer,
   TouchesPosition,
-  CalendarData
+  CalendarData,
+  Language,
+  Languages
 };

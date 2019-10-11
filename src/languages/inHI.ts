@@ -1,4 +1,6 @@
-module.exports = {
+import { Language } from "../calendar/types";
+
+const inHI: Language = {
   daysWeek: [
     "Ravivar",
     "Somvar",
@@ -21,9 +23,7 @@ module.exports = {
     "Oktuber",
     "Novambar",
     "Disambar"
-  ],
-  settings: {
-    settings: "Settings",
-    theme: "Color Theme"
-  },
+  ]
 };
+
+module.exports = inHI;
