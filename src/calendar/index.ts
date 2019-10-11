@@ -244,9 +244,7 @@ const CalendarJS = (): any => {
             .currentMonth - 1}-${container.localDate.currentYear}`
         );
 
-        if (_eventData.has(span.getAttribute("data-date"))) {
-          span.classList.add("calendarEvent");
-        }
+        span.replaceWith(loadPageInDate(span));
 
         span.classList.add("calendarLastAndNextMonth");
         span.innerHTML = `${totalDaysIntLastMonth - (i - 1)}`;
@@ -260,9 +258,7 @@ const CalendarJS = (): any => {
           `${i}-${container.localDate.currentMonth}-${container.localDate.currentYear}`
         );
 
-        if (_eventData.has(span.getAttribute("data-date"))) {
-          span.classList.add("calendarEvent");
-        }
+        loadPageInDate(span);
 
         if (
           i == container.localDate.currentDay &&
@@ -271,6 +267,7 @@ const CalendarJS = (): any => {
         ) {
           childSpan.innerHTML = i.toString();
           span.classList.add("calendarToday");
+          span.setAttribute("data-today", "true");
           span.appendChild(childSpan);
         } else {
           span.innerHTML = i.toString();
@@ -287,9 +284,7 @@ const CalendarJS = (): any => {
           }`
         );
 
-        if (_eventData.has(span.getAttribute("data-date"))) {
-          span.classList.add("calendarEvent");
-        }
+        span.replaceWith(loadPageInDate(span));
 
         span.classList.add("calendarLastAndNextMonth");
         span.innerHTML = i.toString();
@@ -298,6 +293,22 @@ const CalendarJS = (): any => {
 
       body.className = container.tags.classes.calendarBody.substring(1);
       return body;
+    };
+
+    const loadPageInDate = (
+      current: HTMLSpanElement
+    ): HTMLSpanElement | null => {
+      const date: string = current.getAttribute("data-date");
+      if (_eventData.has(date)) {
+        let nSpan: HTMLSpanElement = document.createElement("span");
+        let span: HTMLSpanElement = document.createElement("span");
+        span.classList.add("calendarEvent");
+        span.setAttribute("data-date", date);
+        span.appendChild(nSpan);
+        nSpan.innerHTML = date.slice(0, 2);
+        return span;
+      }
+      return;
     };
 
     /**
