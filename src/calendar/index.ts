@@ -7,13 +7,16 @@ import {
 } from "./types";
 import writeConsole from "./util";
 import { resolve } from "url";
+import { spawn } from "child_process";
 
 const CalendarJS = (): any => {
   let _instance = null;
   let _calendarContainer: HTMLDivElement;
   let _headerToRender: HTMLDivElement;
   let _bodyToRender: HTMLDivElement;
+  let _boardToRender: HTMLDivElement;
   let _eventData: Map<string, CalendarData> = new Map<string, CalendarData>();
+  let _randomNumber: number = 0;
   let _areaTouches: TouchesPosition = {
     clientX: 0,
     clientY: 0
@@ -244,10 +247,11 @@ const CalendarJS = (): any => {
             .currentMonth - 1}-${container.localDate.currentYear}`
         );
 
-        span.replaceWith(loadPageInDate(span));
-
         span.classList.add("calendarLastAndNextMonth");
         span.innerHTML = `${totalDaysIntLastMonth - (i - 1)}`;
+
+        loadPageInDate(span);
+
         body.appendChild(span);
       }
 
@@ -257,8 +261,6 @@ const CalendarJS = (): any => {
           "data-date",
           `${i}-${container.localDate.currentMonth}-${container.localDate.currentYear}`
         );
-
-        loadPageInDate(span);
 
         if (
           i == container.localDate.currentDay &&
@@ -272,6 +274,9 @@ const CalendarJS = (): any => {
         } else {
           span.innerHTML = i.toString();
         }
+
+        loadPageInDate(span);
+
         body.appendChild(span);
       }
 
@@ -284,10 +289,11 @@ const CalendarJS = (): any => {
           }`
         );
 
-        span.replaceWith(loadPageInDate(span));
-
         span.classList.add("calendarLastAndNextMonth");
         span.innerHTML = i.toString();
+
+        loadPageInDate(span);
+
         body.appendChild(span);
       }
 
@@ -295,20 +301,66 @@ const CalendarJS = (): any => {
       return body;
     };
 
-    const loadPageInDate = (
-      current: HTMLSpanElement
-    ): HTMLSpanElement | null => {
+    /**
+     * To render container events and settings
+     */
+    const renderBoard = (): HTMLDivElement => {
+      let board: HTMLDivElement = document.createElement("div");
+      const renderStr: string = `<div>\<span></span>\</div>`;
+      board.className = container.tags.classes.eventDetails.substring(1);
+      board.innerHTML = renderStr;
+      return board;
+    };
+
+    const loadPageInDate = (current: HTMLSpanElement): void => {
       const date: string = current.getAttribute("data-date");
       if (_eventData.has(date)) {
         let nSpan: HTMLSpanElement = document.createElement("span");
-        let span: HTMLSpanElement = document.createElement("span");
-        span.classList.add("calendarEvent");
-        span.setAttribute("data-date", date);
-        span.appendChild(nSpan);
         nSpan.innerHTML = date.slice(0, 2);
-        return span;
+        current.classList.add("calendarEvent");
+        current.innerHTML = "";
+        current.setAttribute("data-id", "-1");
+        // RESOLVER PROBLEMA DE RENDERIZAÇÃO COM CACHE
+        // Add event in date
+        current.addEventListener(
+          "click",
+          e => {
+            console.log(e.target);
+            if (
+              _boardToRender === undefined ||
+              _randomNumber !== parseInt(_boardToRender.getAttribute("data-id"))
+            ) {
+              _randomNumber = Math.round(1 + Math.random() * (100 - 1));
+              _boardToRender = showEventsDay(date);
+              _boardToRender.setAttribute("data-id", _randomNumber.toString());
+            }
+            _calendarContainer.lastChild.appendChild(_boardToRender);
+          },
+          false
+        );
+
+        current.append(nSpan);
       }
-      return;
+    };
+
+    const showEventsDay = (date: string): HTMLDivElement => {
+      const allEventsOfDay: HTMLUListElement = document.createElement("ul");
+      _eventData.forEach((v, k) => {
+        if (date === k) {
+          const li: HTMLLIElement = document.createElement("li");
+          const a: HTMLAnchorElement = document.createElement("a");
+          li.appendChild(a);
+
+          a.href = v.link !== "" || v.link !== undefined ? v.link : "#";
+          a.innerHTML = `${v.name} - ${v.date}`;
+          a.setAttribute("rel", "noopener noreferrer");
+
+          allEventsOfDay.appendChild(li);
+        }
+      });
+      const board: HTMLDivElement = renderBoard();
+      board.appendChild(allEventsOfDay);
+      return board;
     };
 
     /**
@@ -417,7 +469,7 @@ const CalendarJS = (): any => {
     return document.querySelectorAll(selector);
   };
 
-  const hiddenDayEvents = () => {
+  const hideEventsDay = () => {
     console.log("resolve");
     //selectHTMLDocumentTag(container.tags.ids.eventDetails)
     //this.selected[0].style.transform = "translateX(-100%)";
