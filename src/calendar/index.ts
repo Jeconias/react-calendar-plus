@@ -320,25 +320,30 @@ const CalendarJS = (): any => {
         current.classList.add("calendarEvent");
         current.innerHTML = "";
         current.setAttribute("data-id", "-1");
-        // RESOLVER PROBLEMA DE RENDERIZAÇÃO COM CACHE
         // Add event in date
         current.addEventListener(
           "click",
           e => {
-            console.log(e.target);
             if (
               _boardToRender === undefined ||
-              _randomNumber !== parseInt(_boardToRender.getAttribute("data-id"))
+              _randomNumber !== parseInt(current.getAttribute("data-id"))
             ) {
+              const hasBoard: boolean =
+                <HTMLDivElement>_bodyToRender.lastChild === _boardToRender
+                  ? true
+                  : false;
               _randomNumber = Math.round(1 + Math.random() * (100 - 1));
               _boardToRender = showEventsDay(date);
-              _boardToRender.setAttribute("data-id", _randomNumber.toString());
+              current.setAttribute("data-id", _randomNumber.toString());
+              if (hasBoard === true) {
+                _bodyToRender.lastChild.replaceWith(_boardToRender);
+              } else {
+                _bodyToRender.appendChild(_boardToRender);
+              }
             }
-            _calendarContainer.lastChild.appendChild(_boardToRender);
           },
           false
         );
-
         current.append(nSpan);
       }
     };
