@@ -306,7 +306,7 @@ const CalendarJS = (): any => {
      */
     const renderBoard = (): HTMLDivElement => {
       let board: HTMLDivElement = document.createElement("div");
-      const renderStr: string = `<div>\<span></span>\</div>`;
+      const renderStr: string = `<div>\<span></span>\</div><ul></ul>`;
       board.className = container.tags.classes.eventDetails.substring(1);
       board.innerHTML = renderStr;
       return board;
@@ -324,23 +324,12 @@ const CalendarJS = (): any => {
         current.addEventListener(
           "click",
           e => {
-            if (
-              _boardToRender === undefined ||
-              _randomNumber !== parseInt(current.getAttribute("data-id"))
-            ) {
-              const hasBoard: boolean =
-                <HTMLDivElement>_bodyToRender.lastChild === _boardToRender
-                  ? true
-                  : false;
+            if (_randomNumber !== parseInt(current.getAttribute("data-id"))) {
               _randomNumber = Math.round(1 + Math.random() * (100 - 1));
-              _boardToRender = showEventsDay(date);
               current.setAttribute("data-id", _randomNumber.toString());
-              if (hasBoard === true) {
-                _bodyToRender.lastChild.replaceWith(_boardToRender);
-              } else {
-                _bodyToRender.appendChild(_boardToRender);
-              }
+              _boardToRender.lastChild.replaceWith(showEventsDay(date));
             }
+            _boardToRender.style.transform = "translateX(0%)";
           },
           false
         );
@@ -348,7 +337,7 @@ const CalendarJS = (): any => {
       }
     };
 
-    const showEventsDay = (date: string): HTMLDivElement => {
+    const showEventsDay = (date: string): HTMLUListElement => {
       const allEventsOfDay: HTMLUListElement = document.createElement("ul");
       _eventData.forEach((v, k) => {
         if (date === k) {
@@ -363,9 +352,7 @@ const CalendarJS = (): any => {
           allEventsOfDay.appendChild(li);
         }
       });
-      const board: HTMLDivElement = renderBoard();
-      board.appendChild(allEventsOfDay);
-      return board;
+      return allEventsOfDay;
     };
 
     /**
@@ -376,10 +363,12 @@ const CalendarJS = (): any => {
     const renderCalendar = (): void => {
       _headerToRender = renderHeader();
       _bodyToRender = renderBody();
+      _boardToRender = renderBoard();
 
       _calendarContainer.innerHTML = "";
       _calendarContainer.appendChild(_headerToRender);
       _calendarContainer.appendChild(_bodyToRender);
+      _bodyToRender.appendChild(_boardToRender);
 
       loadEvents();
     };
