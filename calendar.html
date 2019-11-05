@@ -18,19 +18,22 @@
         name: "Event Name",
         date: "10-11-2019",
         time: "18:00",
-        author: "Mario"
+        author: "Mario",
+        link: "#"
       },
       {
         name: "Event Name",
         date: "12-11-2019",
         time: "18:00",
-        author: "Mario"
+        author: "Mario",
+        link: "#"
       },
       {
         name: "Event Name",
         date: "21-10-2019",
         time: "18:00",
-        author: "Mario"
+        author: "Mario",
+        link: "#"
       }
     ];
     const calendar = CalendarJS();
@@ -39,6 +42,7 @@
       .container("#calendar")
       .data(eventsDataBase)
       .lang("ptBR")
+      .settings()
       .render();
   </script>
 </html>

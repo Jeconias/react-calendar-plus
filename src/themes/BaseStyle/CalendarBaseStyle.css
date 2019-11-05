@@ -21,7 +21,7 @@
   position: relative;
 }
 
-.eventDetails,
+#eventsOfDate,
 #settingsContainer {
   position: absolute;
   top: -40px;
@@ -30,10 +30,14 @@
   background-color: #fff;
   z-index: 2;
   transition: 0.5s;
-  transform: translateX(-1000%);
+  transform: translateX(-100%);
 }
 
-.eventDetails > div:first-child,
+.eventsOfDateShow {
+  transform: translateX(0) !important;
+}
+
+#eventsOfDate > div:first-child,
 #settingsContainer > div:first-child {
   height: 30px;
   padding: 0;
@@ -45,12 +49,12 @@
   align-items: center;
 }
 
-.eventDetails > div:first-child span,
+#eventsOfDate > div:first-child span,
 #settingsContainer > div:first-child span {
   padding-left: 5px;
 }
 
-.eventDetails > div:first-child span:first-child,
+#eventsOfDate > div:first-child span:first-child,
 #settingsContainer > div:first-child span:first-child {
   width: 20px;
   height: 20px;
@@ -63,13 +67,13 @@
   padding-left: 0;
 }
 
-.eventDetails > div:first-child span:first-child:hover,
+#eventsOfDate > div:first-child span:first-child:hover,
 #settingsContainer > div:first-child span:first-child:hover {
   border-color: transparent;
   background-color: #fe623e;
 }
 
-.eventDetails > div:first-child span:first-child::before,
+#eventsOfDate > div:first-child span:first-child::before,
 #settingsContainer > div:first-child span:first-child::before {
   content: "";
   width: 5px;
@@ -85,11 +89,11 @@
   display: inline-block;
 }
 
-.eventDetails > div:first-child span:hover::before {
+#eventsOfDate > div:first-child span:hover::before {
   border-color: #fff;
 }
 
-.eventDetails > ul {
+#eventsOfDate > ul {
   margin: 0 auto;
   padding: 0 20px;
   padding-bottom: 10px;
@@ -98,26 +102,26 @@
   max-height: 83%;
 }
 
-.eventDetails > ul::-webkit-scrollbar {
+#eventsOfDate > ul::-webkit-scrollbar {
   width: 7px;
 }
 
-.eventDetails > ul::-webkit-scrollbar-track {
+#eventsOfDate > ul::-webkit-scrollbar-track {
   background: #ededed;
 }
 
-.eventDetails > ul::-webkit-scrollbar-thumb {
+#eventsOfDate > ul::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background: #dcdbdb;
   transition: 0.5s;
 }
 
-.eventDetails > ul::-webkit-scrollbar-thumb:hover {
+#eventsOfDate > ul::-webkit-scrollbar-thumb:hover {
   background: #b3b3b3;
   width: 20px;
 }
 
-.eventDetails > ul > li {
+#eventsOfDate > ul > li {
   border-radius: 5px;
   margin-top: 5px;
   padding: 5px 8px;
@@ -127,7 +131,7 @@
   font-size: 0.9em;
 }
 
-.eventDetails a {
+#eventsOfDate a {
   text-decoration: none;
   color: #fff;
   font-weight: 600;
@@ -136,7 +140,7 @@
   transition: 0.2s ease-in;
 }
 
-.eventDetails a:hover {
+#eventsOfDate a:hover {
   color: #1a363f;
 }
 

@@ -37,21 +37,24 @@ type CalendarContainer = {
     daysWeek: string[];
     months: string[];
   };
-  tags: {
-    ids: {
-      eventDetails: string;
-      calendarHeaderYear: string;
-      calendarHeaderMonth: string;
-      hiddenDayEvents: string;
+  containers: {
+    eventsOfDate: {
+      id: string;
+      classes: {
+        eventsOfDateShow: string;
+      };
     };
-    classes: {
-      eventDetails: string;
-      calendarEvent: string;
-      calendarHeader: string;
-      calendarBody: string;
-      calendarActionBefore: string;
-      calendarActionAfter: string;
-    };
+  };
+  ids: {
+    calendarHeaderYear: string;
+    calendarHeaderMonth: string;
+  };
+  classes: {
+    calendarEvent: string;
+    calendarHeader: string;
+    calendarBody: string;
+    calendarActionBefore: string;
+    calendarActionAfter: string;
   };
   settings: {
     show: boolean;
@@ -79,6 +82,7 @@ type MethodsPublic = {
   data: Function;
   lang: Function;
   theme: Function;
+  settings: Function;
   render: Function;
 };
 

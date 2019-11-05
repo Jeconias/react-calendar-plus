@@ -6,8 +6,6 @@ import {
   Languages
 } from "./types";
 import writeConsole from "./util";
-import { resolve } from "url";
-import { spawn } from "child_process";
 
 const CalendarJS = (): any => {
   let _instance = null;
@@ -16,6 +14,7 @@ const CalendarJS = (): any => {
   let _bodyToRender: HTMLDivElement;
   let _boardToRender: HTMLDivElement;
   let _eventData: Map<string, CalendarData> = new Map<string, CalendarData>();
+  let _loadSettings: boolean = false;
   let _randomNumber: number = 0;
   let _areaTouches: TouchesPosition = {
     clientX: 0,
@@ -128,11 +127,20 @@ const CalendarJS = (): any => {
     };
 
     /**
+     * Method to enable settings
+     */
+    const loadSettings = (): MethodsPublic => {
+      writeConsole("Enable Settings");
+      _loadSettings = true;
+      return methodsPublic;
+    };
+
+    /**
      * Method to load action events
      */
     const loadEvents = (): void => {
       const previousArrow: NodeList | boolean = selectHTMLDocumentTag(
-        container.tags.classes.calendarActionBefore
+        container.classes.calendarActionBefore
       );
       if (previousArrow === false) {
         writeConsole("Não foi possível registrar o evento para voltar um mês");
@@ -140,7 +148,7 @@ const CalendarJS = (): any => {
       }
 
       const nextArrow: NodeList | boolean = selectHTMLDocumentTag(
-        container.tags.classes.calendarActionAfter
+        container.classes.calendarActionAfter
       );
       if (nextArrow === false) {
         writeConsole("Não foi possível registrar o evento para voltar um mês");
@@ -168,7 +176,7 @@ const CalendarJS = (): any => {
       _calendarContainer.appendChild(_bodyToRender);
 
       const textMonth: NodeList | boolean = selectHTMLDocumentTag(
-        container.tags.ids.calendarHeaderMonth
+        container.ids.calendarHeaderMonth
       );
       if (textMonth === false) {
         writeConsole("Erro ao selecionar text header html document.");
@@ -176,7 +184,7 @@ const CalendarJS = (): any => {
       }
 
       const textYear: NodeList | boolean = selectHTMLDocumentTag(
-        container.tags.ids.calendarHeaderYear
+        container.ids.calendarHeaderYear
       );
 
       if (textYear === false) {
@@ -219,7 +227,7 @@ const CalendarJS = (): any => {
           <li>${container.lang.daysWeek[6]}</li>\
         </ul>\
       </div>`;
-      header.className = container.tags.classes.calendarHeader.substring(1);
+      header.className = container.classes.calendarHeader;
       header.innerHTML = renderStr;
       return header;
     };
@@ -297,7 +305,7 @@ const CalendarJS = (): any => {
         body.appendChild(span);
       }
 
-      body.className = container.tags.classes.calendarBody.substring(1);
+      body.className = container.classes.calendarBody;
       return body;
     };
 
@@ -305,11 +313,69 @@ const CalendarJS = (): any => {
      * To render container events and settings
      */
     const renderBoard = (): HTMLDivElement => {
-      let board: HTMLDivElement = document.createElement("div");
-      const renderStr: string = `<div>\<span></span>\</div><ul></ul>`;
-      board.className = container.tags.classes.eventDetails.substring(1);
-      board.innerHTML = renderStr;
+      const board: HTMLDivElement = document.createElement("div");
+      const div: HTMLDivElement = document.createElement("div");
+      const span: HTMLSpanElement = document.createElement("span");
+      const ul: HTMLUListElement = document.createElement("ul");
+
+      board.appendChild(div);
+      board.appendChild(ul);
+      div.appendChild(span);
+
+      board.id = container.containers.eventsOfDate.id;
+
+      span.addEventListener("click", () => {
+        board.classList.remove(
+          container.containers.eventsOfDate.classes.eventsOfDateShow
+        );
+      });
       return board;
+    };
+
+    const renderSettings = (): void | HTMLDivElement => {
+      if (_loadSettings === false) return;
+
+      const settingsButton: HTMLDivElement = document.createElement("div");
+      settingsButton.id = "settingsButton";
+      _bodyToRender.appendChild(settingsButton);
+
+      const settingsContainer: HTMLDivElement = document.createElement("div");
+      settingsContainer.id = "settingsContainer";
+
+      const settingsHeaderContainer: HTMLDivElement = document.createElement(
+        "div"
+      );
+
+      const backButton: HTMLSpanElement = document.createElement("span");
+      backButton.className = "backButton";
+
+      const settingsHeaderTitle: HTMLSpanElement = document.createElement(
+        "span"
+      );
+      //settingsHeaderTitle.innerText = this.container.lang.settings.settings || "Settings";
+
+      settingsHeaderContainer.appendChild(backButton);
+      settingsHeaderContainer.appendChild(settingsHeaderTitle);
+
+      const settingsBodyContainer: HTMLDivElement = document.createElement(
+        "div"
+      );
+      settingsBodyContainer.className = "settingsBody";
+      //settingsBodyContainer.appendChild(ThemeSetting());
+
+      settingsButton.addEventListener(
+        "click",
+        () => (settingsContainer.style.transform = "translateX(0%)")
+      );
+      backButton.addEventListener(
+        "click",
+        () => (settingsContainer.style.transform = "translateX(-100%)")
+      );
+
+      settingsContainer.appendChild(settingsHeaderContainer);
+      settingsContainer.appendChild(settingsBodyContainer);
+
+      return settingsContainer;
     };
 
     const loadPageInDate = (current: HTMLSpanElement): void => {
@@ -329,7 +395,9 @@ const CalendarJS = (): any => {
               current.setAttribute("data-id", _randomNumber.toString());
               _boardToRender.lastChild.replaceWith(showEventsDay(date));
             }
-            _boardToRender.style.transform = "translateX(0%)";
+            _boardToRender.classList.add(
+              container.containers.eventsOfDate.classes.eventsOfDateShow
+            );
           },
           false
         );
@@ -364,11 +432,13 @@ const CalendarJS = (): any => {
       _headerToRender = renderHeader();
       _bodyToRender = renderBody();
       _boardToRender = renderBoard();
+      const settingsToRender: void | HTMLDivElement = renderSettings();
 
       _calendarContainer.innerHTML = "";
       _calendarContainer.appendChild(_headerToRender);
       _calendarContainer.appendChild(_bodyToRender);
       _bodyToRender.appendChild(_boardToRender);
+      if (settingsToRender) _bodyToRender.appendChild(settingsToRender);
 
       loadEvents();
     };
@@ -383,23 +453,23 @@ const CalendarJS = (): any => {
       currentMonth =
         currentMonth === 0 ? container.localDate.currentMonth : currentMonth;
 
-      if (currentMonth == -1) currentMonth = 11;
+      if (currentMonth === -1) currentMonth = 11;
 
       if (
-        currentMonth == 0 ||
-        currentMonth == 2 ||
-        currentMonth == 4 ||
-        currentMonth == 6 ||
-        currentMonth == 7 ||
-        currentMonth == 9 ||
-        currentMonth == 11
+        currentMonth === 0 ||
+        currentMonth === 2 ||
+        currentMonth === 4 ||
+        currentMonth === 6 ||
+        currentMonth === 7 ||
+        currentMonth === 9 ||
+        currentMonth === 11
       ) {
         return 31;
       } else if (
-        currentMonth == 3 ||
-        currentMonth == 5 ||
-        currentMonth == 8 ||
-        currentMonth == 10
+        currentMonth === 3 ||
+        currentMonth === 5 ||
+        currentMonth === 8 ||
+        currentMonth === 10
       ) {
         return 30;
       } else {
@@ -412,6 +482,7 @@ const CalendarJS = (): any => {
       data: loadData,
       lang: loadLang,
       theme: loadTheme,
+      settings: loadSettings,
       render: renderCalendar
     };
 
@@ -463,12 +534,6 @@ const CalendarJS = (): any => {
     return document.querySelectorAll(selector);
   };
 
-  const hideEventsDay = () => {
-    console.log("resolve");
-    //selectHTMLDocumentTag(container.tags.ids.eventDetails)
-    //this.selected[0].style.transform = "translateX(-100%)";
-  };
-
   /**
    *
    * Method representing the constructor
@@ -489,21 +554,24 @@ const CalendarJS = (): any => {
         daysWeek: [],
         months: []
       },
-      tags: {
-        ids: {
-          eventDetails: "#eventDetails",
-          calendarHeaderYear: "#calendarHeaderYear",
-          calendarHeaderMonth: "#calendarHeaderMonth",
-          hiddenDayEvents: "#hiddenDayEvents"
-        },
-        classes: {
-          eventDetails: ".eventDetails",
-          calendarEvent: ".calendarEvent",
-          calendarHeader: ".calendarHeader",
-          calendarBody: ".calendarBody",
-          calendarActionBefore: ".calendarActionBefore",
-          calendarActionAfter: ".calendarActionAfter"
+      containers: {
+        eventsOfDate: {
+          id: "eventsOfDate",
+          classes: {
+            eventsOfDateShow: "eventsOfDateShow"
+          }
         }
+      },
+      ids: {
+        calendarHeaderYear: "calendarHeaderYear",
+        calendarHeaderMonth: "calendarHeaderMonth"
+      },
+      classes: {
+        calendarEvent: "calendarEvent",
+        calendarHeader: "calendarHeader",
+        calendarBody: "calendarBody",
+        calendarActionBefore: "calendarActionBefore",
+        calendarActionAfter: "calendarActionAfter"
       },
       settings: {
         show: false,
