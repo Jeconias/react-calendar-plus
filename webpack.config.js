@@ -1,44 +1,35 @@
 const path = require("path");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
-const base = {
-  entry: "./src/CalendarJS.js",
+const ENTRY = "./src/index.js";
+const OUTPUT_DIR = "dist";
+const OUTPUT_FILENAME = "bundle.js";
+const LIBRARY_NAME = "CalendarPlus";
+
+module.exports = {
+  entry: ENTRY,
+  output: {
+    library: LIBRARY_NAME,
+    path: path.resolve(__dirname, OUTPUT_DIR),
+    filename: OUTPUT_FILENAME,
+    libraryTarget: "umd"
+  },
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"]
-          }
-        }
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
       }
     ]
-  }
-};
-
-const prod = {
-  ...base,
-  mode: "production",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "calendarjs.min.js",
-    library: ["CalendarJS"]
-  }
-};
-
-const dev = {
-  ...base,
-  mode: "development",
-  output: {
-    path: path.resolve(__dirname, "dev"),
-    filename: "calendarjs-dev.js",
-    library: ["CalendarJS"]
-  }
-};
-
-module.exports = (env, args) => {
-  if (args.mode === "production") return prod;
-  return dev;
+  },
+  resolve: {
+    extensions: [".js", ".json"]
+  },
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./tests/index.html",
+      filename: "index.html"
+    })
+  ]
 };
