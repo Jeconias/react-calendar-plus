@@ -1,10 +1,10 @@
-const path = require("path");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-const ENTRY = "./src/index.js";
-const OUTPUT_DIR = "dist";
-const OUTPUT_FILENAME = "bundle.js";
-const LIBRARY_NAME = "CalendarPlus";
+const ENTRY = './src/index.tsx';
+const OUTPUT_DIR = 'dist';
+const OUTPUT_FILENAME = 'bundle.js';
+const LIBRARY_NAME = 'CalendarPlus';
 
 module.exports = {
   entry: ENTRY,
@@ -12,24 +12,39 @@ module.exports = {
     library: LIBRARY_NAME,
     path: path.resolve(__dirname, OUTPUT_DIR),
     filename: OUTPUT_FILENAME,
-    libraryTarget: "umd"
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
       {
         test: /\.(js)$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
-      }
-    ]
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: 'ts-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: [".js", ".json"]
+    alias: {
+      '@components': path.resolve(__dirname, './src/components'),
+    },
+    extensions: ['.js', '.json', '.tsx', '.ts'],
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: "./tests/index.html",
-      filename: "index.html"
-    })
-  ]
+      template: './tests/index.html',
+      filename: 'index.html',
+    }),
+  ],
+  devServer: {
+    allowedHosts: ['127.0.0.1'],
+    contentBase: [path.join(__dirname, 'dist')],
+    compress: true,
+    open: true,
+    port: 1717,
+  },
 };

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "outDir": "./dist/",
+    "noImplicitAny": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@components/*": ["components/*"]
+    }
+  },
+  "exclude": ["./node_modules/**/*"],
+  "include": ["./src"]
+}
