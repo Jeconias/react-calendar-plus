@@ -1,6 +1,6 @@
-import CalendarPlus from './CalendarPlus';
-import React from 'react';
 import ReactDom from 'react-dom';
+import React from 'react';
+import CalendarPlus from './CalendarPlus';
 
 const calendarPreview: HTMLElement = document.getElementById('calendarPreview');
 

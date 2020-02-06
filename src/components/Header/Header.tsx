@@ -1,6 +1,6 @@
 import Arrow from '@components/Arrows/Arrows';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Header = () => {
   return (
@@ -21,7 +21,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1a363f;
+  background-color: ${({ theme }) => theme.header.backgroundColor};
   padding: 10px 20px;
 `;
 const InfoContainer = styled.div`
