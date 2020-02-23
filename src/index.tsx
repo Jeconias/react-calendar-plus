@@ -1,5 +1,8 @@
-import ReactDom from 'react-dom';
+import './i18n';
+
 import React from 'react';
+import ReactDom from 'react-dom';
+
 import CalendarPlus from './CalendarPlus';
 
 const calendarPreview: HTMLElement = document.getElementById('calendarPreview');

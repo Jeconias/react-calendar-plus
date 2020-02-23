@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import React from 'react';
+import { ThemeProvider } from 'styled-components';
 
 //TODO Add types
 const basetheme = {

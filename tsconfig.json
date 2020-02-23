@@ -11,7 +11,9 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@components/*": ["components/*"]
+      "@src/*": ["./*"],
+      "@components/*": ["components/*"],
+      "@core/*": ["core/*"]
     }
   },
   "exclude": ["./node_modules/**/*"],
