@@ -7,7 +7,10 @@ const isLeap = (date: Date): Boolean =>
 /**
  * Return first day of month
  */
-const firstDayMonth = (date: Date): number => date.getDay();
+const firstDayMonth = (date: Date): number => {
+  const newDate = date.setDate(1);
+  return new Date(newDate).getDay();
+};
 
 /**
  * when month is equal to 0, return to 11
