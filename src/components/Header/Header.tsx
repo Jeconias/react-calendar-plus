@@ -1,16 +1,29 @@
 import Arrow from '@components/Arrows/Arrows';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
+import CalendarContext from '@src/CalendarPlusContext';
+import { useTranslation } from 'react-i18next';
 
-const Header = () => {
+interface CalendarHeaderInterface {
+  handleNextMonth: Function;
+}
+
+const Header = (props: CalendarHeaderInterface) => {
+  const { t } = useTranslation();
+
+  const context = useContext(CalendarContext);
+  const cDate = context.currentDate;
+
+  const { handleNextMonth } = props;
+
   return (
     <Container>
       <Arrow onClick={() => console.log('Left')} />
       <InfoContainer>
-        <Month>Outubro</Month>
-        <Year>2019</Year>
+        <Month>{t(`months.${cDate.getMonth()}`)}</Month>
+        <Year>{cDate.getFullYear()}</Year>
       </InfoContainer>
-      <Arrow direction="right" onClick={() => console.log('Right')} />
+      <Arrow direction="right" onClick={() => handleNextMonth()} />
     </Container>
   );
 };

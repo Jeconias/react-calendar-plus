@@ -54,4 +54,9 @@ const totalDaysOfMonth = (date: Date): number => {
   }
 };
 
-export { isLeap, firstDayMonth, lastMonth, nextMonth, totalDaysOfMonth };
+/**
+ * Clone date object
+ */
+const clone = (date: Date) => new Date(date);
+
+export { isLeap, firstDayMonth, lastMonth, nextMonth, totalDaysOfMonth, clone };
