@@ -1,11 +1,12 @@
 import React from 'react';
 
 interface CalendarContextInterface {
-  currentDate: Date;
+  getDate(): Date;
 }
 
 const CalendarContext = React.createContext<CalendarContextInterface>({
-  currentDate: new Date(),
+  getDate: () => new Date(),
 });
 
 export default CalendarContext;
+export { CalendarContextInterface };

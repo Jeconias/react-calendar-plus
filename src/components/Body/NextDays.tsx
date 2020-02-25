@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { NextDaysInterface } from '@src/core/interfaces/NextDaysInterface';
-import { Day } from './Body';
+import { ContainerDay, Day } from './Body';
 
 const NextDays: React.FC<NextDaysInterface> = (props: NextDaysInterface) => {
   const { daysOfNextMonth } = props;
@@ -13,7 +13,9 @@ const NextDays: React.FC<NextDaysInterface> = (props: NextDaysInterface) => {
   return (
     <Fragment>
       {render.map((day: number) => (
-        <Day key={`${day}-daysAgo`}>{day}</Day>
+        <ContainerDay className="nextDay" key={`${day}-nextDay`}>
+          <Day>{day}</Day>
+        </ContainerDay>
       ))}
     </Fragment>
   );

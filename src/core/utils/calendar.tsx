@@ -15,7 +15,7 @@ const firstDayMonth = (date: Date): number => {
 /**
  * when month is equal to 0, return to 11
  */
-const lastMonth = (date: Date): number =>
+const previousMonth = (date: Date): number =>
   date.getMonth() != 0 ? date.getMonth() - 1 : 11;
 
 /**
@@ -59,4 +59,11 @@ const totalDaysOfMonth = (date: Date): number => {
  */
 const clone = (date: Date) => new Date(date);
 
-export { isLeap, firstDayMonth, lastMonth, nextMonth, totalDaysOfMonth, clone };
+export {
+  isLeap,
+  firstDayMonth,
+  previousMonth,
+  nextMonth,
+  totalDaysOfMonth,
+  clone,
+};

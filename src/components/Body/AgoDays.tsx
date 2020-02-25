@@ -1,11 +1,10 @@
 import React, { Fragment } from 'react';
 import { AgoDaysInterface } from '@src/core/interfaces/AgoDaysInterface';
-import { Day } from './Body';
+import { ContainerDay, Day } from './Body';
 
 const AgoDays: React.FC<AgoDaysInterface> = ({
   firstDayOfMonth,
   daysOfLastMonth,
-  ...props
 }) => {
   const render: number[] = [];
   for (let i = firstDayOfMonth; i > 0; i--) {
@@ -13,13 +12,13 @@ const AgoDays: React.FC<AgoDaysInterface> = ({
   }
 
   return (
-    <div>
+    <Fragment>
       {render.map((day: number) => (
-        <Day className="dayAgo" key={`${day}-daysAgo`}>
-          {day}
-        </Day>
+        <ContainerDay className="agoDay" key={`${day}-agoDay`}>
+          <Day>{day}</Day>
+        </ContainerDay>
       ))}
-    </div>
+    </Fragment>
   );
 };
 

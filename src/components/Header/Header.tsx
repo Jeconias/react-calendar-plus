@@ -5,20 +5,21 @@ import CalendarContext from '@src/CalendarPlusContext';
 import { useTranslation } from 'react-i18next';
 
 interface CalendarHeaderInterface {
-  handleNextMonth: Function;
+  handleNextMonth(): void;
+  handlePreviousMonth(): void;
 }
 
 const Header = (props: CalendarHeaderInterface) => {
   const { t } = useTranslation();
 
   const context = useContext(CalendarContext);
-  const cDate = context.currentDate;
+  const cDate = context.getDate();
 
-  const { handleNextMonth } = props;
+  const { handlePreviousMonth, handleNextMonth } = props;
 
   return (
     <Container>
-      <Arrow onClick={() => console.log('Left')} />
+      <Arrow onClick={() => handlePreviousMonth()} />
       <InfoContainer>
         <Month>{t(`months.${cDate.getMonth()}`)}</Month>
         <Year>{cDate.getFullYear()}</Year>

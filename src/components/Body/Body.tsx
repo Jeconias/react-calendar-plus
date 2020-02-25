@@ -5,22 +5,21 @@ import { useTranslation } from 'react-i18next';
 import {
   totalDaysOfMonth,
   firstDayMonth,
-  lastMonth,
+  previousMonth,
   clone,
 } from '@core/utils/calendar';
 import CalendarContext from '@src/CalendarPlusContext';
 import AgoDays from './AgoDays';
 import CurrentDays from './CurrentDays';
 import NextDays from './NextDays';
-import { AgoDaysInterface } from '@src/core/interfaces/AgoDaysInterface';
 
 const Body: React.FC = () => {
   const { t } = useTranslation();
   const context = useContext(CalendarContext);
-  const cDate = context.currentDate;
+  const cDate = context.getDate();
 
   const daysOfCurrentMonth: number = totalDaysOfMonth(cDate);
-  const dateOfLastMonth = new Date(clone(cDate).setMonth(lastMonth(cDate)));
+  const dateOfLastMonth = new Date(clone(cDate).setMonth(previousMonth(cDate)));
   const daysOfLastMonth: number = totalDaysOfMonth(dateOfLastMonth);
   const firstDayOfMonth: number = firstDayMonth(cDate) || 7;
   const daysOfNextMonth: number = 42 - (firstDayOfMonth + daysOfCurrentMonth);
@@ -37,7 +36,7 @@ const Body: React.FC = () => {
         <Day>{t('daysOfWeek.sat')}</Day>
       </DaysOfWeek>
       <DaysOfMonth>
-        <StyledAgoDays
+        <AgoDays
           firstDayOfMonth={firstDayOfMonth}
           daysOfLastMonth={daysOfLastMonth}
         />
@@ -50,7 +49,13 @@ const Body: React.FC = () => {
 
 export default Body;
 
-export const Day = styled.li`
+export const ContainerDay = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Day = styled.div`
   margin: 0 2px;
 `;
 
@@ -66,14 +71,6 @@ const DaysOfWeek = styled.ul`
   }
 `;
 
-const StyledAgoDays = styled(AgoDays)`
-  background-color: red;
-  & > div {
-    background-color: blue;
-    color: red;
-  }
-`;
-
 const DaysOfMonth = styled.ul`
   position: relative;
   display: grid;
@@ -84,8 +81,34 @@ const DaysOfMonth = styled.ul`
   background-color: ${({ theme }) => theme.body.month.backgroundColor};
 
   ${Day} {
-    font-size: ${rem(12)};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    font-size: ${rem(13)};
+    border-radius: 100%;
   }
+
+  ${({ theme }) => css`
+    & > .agoDay > ${Day} {
+      color: ${theme.body.month.days.ago.color};
+    }
+
+    & > .currentDay > ${Day} {
+      color: ${theme.body.month.days.current.color};
+    }
+
+    & > .nextDay > ${Day} {
+      color: ${theme.body.month.days.next.color};
+    }
+
+    & > .today > ${Day} {
+      color: ${theme.body.month.days.today.color};
+      background-color: ${theme.body.month.days.today.backgroundColor};
+    }
+  `}
 `;
 
 const Container = styled.div`

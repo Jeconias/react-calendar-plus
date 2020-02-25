@@ -1,17 +1,19 @@
 import BaseTheme from '@components/BaseTheme/BaseTheme';
 import Body from '@components/Body/Body';
 import Header from '@components/Header/Header';
-import React, { useState } from 'react';
-
-import CalendarContext from './CalendarPlusContext';
-import { nextMonth } from '@core/utils/calendar';
-import styled from 'styled-components';
 import CalendarPlusInterface from '@core/interfaces/CalendarPlusInterface';
+import { nextMonth, clone, previousMonth } from '@core/utils/calendar';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+import CalendarContext, {
+  CalendarContextInterface,
+} from './CalendarPlusContext';
 
 const CalendarPlus: React.FC<CalendarPlusInterface> = (
   props: CalendarPlusInterface,
 ) => {
-  const [date, setDate] = useState(new Date(2020, 2, 24));
+  const [date, setDate] = useState(new Date());
 
   const handleNextMonth = () => {
     const nextM: number = nextMonth(date);
@@ -20,15 +22,31 @@ const CalendarPlus: React.FC<CalendarPlusInterface> = (
       nextM,
       date.getDate(),
     );
-    console.log(date);
     setDate(new Date(newDate));
   };
 
+  const handlePreviousMonth = () => {
+    const previousM: number = previousMonth(date);
+    const newDate: number = date.setFullYear(
+      previousM === 11 ? date.getFullYear() - 1 : date.getFullYear(),
+      previousM,
+      date.getDate(),
+    );
+    setDate(new Date(newDate));
+  };
+
+  const context: CalendarContextInterface = {
+    getDate: () => clone(date),
+  };
+
   return (
-    <CalendarContext.Provider value={{ currentDate: date }}>
+    <CalendarContext.Provider value={context}>
       <BaseTheme>
         <Container>
-          <Header handleNextMonth={handleNextMonth} />
+          <Header
+            handleNextMonth={handleNextMonth}
+            handlePreviousMonth={handlePreviousMonth}
+          />
           <Body />
         </Container>
       </BaseTheme>

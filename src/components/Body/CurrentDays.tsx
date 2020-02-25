@@ -1,10 +1,13 @@
-import React, { Fragment } from 'react';
-import { Day } from './Body';
+import React, { Fragment, useContext } from 'react';
+import { ContainerDay, Day } from './Body';
 import { CurrentDaysInterface } from '@src/core/interfaces/CurrentDaysInterface';
+import CalendarContext from '@src/CalendarPlusContext';
 
 const CurrentDays: React.FC<CurrentDaysInterface> = (
   props: CurrentDaysInterface,
 ) => {
+  const context = useContext(CalendarContext);
+  const cDate = context.getDate();
   const { daysOfCurrentMonth } = props;
 
   const render: number[] = [];
@@ -15,7 +18,11 @@ const CurrentDays: React.FC<CurrentDaysInterface> = (
   return (
     <Fragment>
       {render.map((day: number) => (
-        <Day key={`${day}-daysAgo`}>{day}</Day>
+        <ContainerDay
+          className={`currentDay ${day === cDate.getDate() ? 'today' : ''}`}
+          key={`${day}-currentDay`}>
+          <Day>{day}</Day>
+        </ContainerDay>
       ))}
     </Fragment>
   );

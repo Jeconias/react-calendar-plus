@@ -13,12 +13,20 @@ const basetheme: DefaultTheme = {
     month: {
       backgroundColor: '#fff',
       days: {
+        today: {
+          backgroundColor: '#4F83D4',
+          color: '#fff',
+        },
         ago: {
           backgroundColor: 'red',
-          color: 'blue',
+          color: '#e3e3e3',
         },
-        current: '',
-        next: '',
+        current: {
+          color: '#414141',
+        },
+        next: {
+          color: '#e3e3e3',
+        },
       },
     },
   },

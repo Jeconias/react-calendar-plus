@@ -12,12 +12,20 @@ declare module 'styled-components' {
       month: {
         backgroundColor: string;
         days: {
+          today: {
+            backgroundColor: string;
+            color: string;
+          };
           ago: {
             backgroundColor: string;
             color: string;
           };
-          current: string;
-          next: string;
+          current: {
+            color: string;
+          };
+          next: {
+            color: string;
+          };
         };
       };
     };
