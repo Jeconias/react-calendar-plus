@@ -1,10 +1,26 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, DefaultTheme } from 'styled-components';
 
 //TODO Add types
-const basetheme = {
+const basetheme: DefaultTheme = {
   header: {
     backgroundColor: '#333',
+  },
+  body: {
+    week: {
+      backgroundColor: '#f9fafc',
+    },
+    month: {
+      backgroundColor: '#fff',
+      days: {
+        ago: {
+          backgroundColor: 'red',
+          color: 'blue',
+        },
+        current: '',
+        next: '',
+      },
+    },
   },
 };
 

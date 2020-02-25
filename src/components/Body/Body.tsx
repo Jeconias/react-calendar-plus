@@ -1,5 +1,5 @@
-import React, { useContext, Fragment } from 'react';
-import styled from 'styled-components';
+import React, { useContext } from 'react';
+import styled, { css } from 'styled-components';
 import { rem } from 'polished';
 import { useTranslation } from 'react-i18next';
 import {
@@ -9,9 +9,12 @@ import {
   clone,
 } from '@core/utils/calendar';
 import CalendarContext from '@src/CalendarPlusContext';
+import AgoDays from './AgoDays';
+import CurrentDays from './CurrentDays';
+import NextDays from './NextDays';
+import { AgoDaysInterface } from '@src/core/interfaces/AgoDaysInterface';
 
-//TODO Bug when render march month
-const Body = () => {
+const Body: React.FC = () => {
   const { t } = useTranslation();
   const context = useContext(CalendarContext);
   const cDate = context.currentDate;
@@ -19,56 +22,8 @@ const Body = () => {
   const daysOfCurrentMonth: number = totalDaysOfMonth(cDate);
   const dateOfLastMonth = new Date(clone(cDate).setMonth(lastMonth(cDate)));
   const daysOfLastMonth: number = totalDaysOfMonth(dateOfLastMonth);
-  const firstDayOfMonth = firstDayMonth(cDate);
+  const firstDayOfMonth: number = firstDayMonth(cDate) || 7;
   const daysOfNextMonth: number = 42 - (firstDayOfMonth + daysOfCurrentMonth);
-
-  const AgoDays: React.FC = () => {
-    const render: number[] = [];
-
-    for (let i = firstDayOfMonth; i > 0; i--) {
-      render.push(daysOfLastMonth - (i - 1));
-    }
-
-    return (
-      <Fragment>
-        {render.map((day: number) => (
-          <Day key={`${day}-daysAgo`}>{day}</Day>
-        ))}
-      </Fragment>
-    );
-  };
-
-  const CurrentDays: React.FC = () => {
-    const render: number[] = [];
-
-    for (let i = 1; i <= daysOfCurrentMonth; i++) {
-      render.push(i);
-    }
-
-    return (
-      <Fragment>
-        {render.map((day: number) => (
-          <Day key={`${day}-daysAgo`}>{day}</Day>
-        ))}
-      </Fragment>
-    );
-  };
-
-  const NextDays: React.FC = () => {
-    const render: number[] = [];
-
-    for (let i = 1; i <= daysOfNextMonth; i++) {
-      render.push(i);
-    }
-
-    return (
-      <Fragment>
-        {render.map((day: number) => (
-          <Day key={`${day}-daysAgo`}>{day}</Day>
-        ))}
-      </Fragment>
-    );
-  };
 
   return (
     <Container>
@@ -82,9 +37,12 @@ const Body = () => {
         <Day>{t('daysOfWeek.sat')}</Day>
       </DaysOfWeek>
       <DaysOfMonth>
-        <AgoDays />
-        <CurrentDays />
-        <NextDays />
+        <StyledAgoDays
+          firstDayOfMonth={firstDayOfMonth}
+          daysOfLastMonth={daysOfLastMonth}
+        />
+        <CurrentDays daysOfCurrentMonth={daysOfCurrentMonth} />
+        <NextDays daysOfNextMonth={daysOfNextMonth} />
       </DaysOfMonth>
     </Container>
   );
@@ -92,16 +50,27 @@ const Body = () => {
 
 export default Body;
 
-const Day = styled.li``;
+export const Day = styled.li`
+  margin: 0 2px;
+`;
 
 const DaysOfWeek = styled.ul`
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding-top: 10px;
+  background-color: ${({ theme }) => theme.body.week.backgroundColor};
 
   ${Day} {
-    margin: 0 5px;
     font-size: ${rem(14)};
+    font-weight: 500;
+  }
+`;
+
+const StyledAgoDays = styled(AgoDays)`
+  background-color: red;
+  & > div {
+    background-color: blue;
+    color: red;
   }
 `;
 
@@ -111,9 +80,8 @@ const DaysOfMonth = styled.ul`
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, minmax(min-content, 27px));
   grid-auto-rows: 37px;
-  padding-bottom: 20px;
   align-items: center;
-  padding-top: 10px;
+  background-color: ${({ theme }) => theme.body.month.backgroundColor};
 
   ${Day} {
     font-size: ${rem(12)};
@@ -121,13 +89,10 @@ const DaysOfMonth = styled.ul`
 `;
 
 const Container = styled.div`
-  background-color: #e57d0d;
-  padding: 5px 20px;
-
   ${DaysOfWeek}, ${DaysOfMonth} {
     text-align: center;
     list-style: none;
-    padding: 0;
+    padding: 5px 20px;
     margin: 0;
   }
 `;
