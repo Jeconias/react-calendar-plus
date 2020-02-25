@@ -55,6 +55,34 @@ const totalDaysOfMonth = (date: Date): number => {
 };
 
 /**
+ * add zero to the left
+ */
+
+const addLeftZero = (
+  element: string | number,
+  addInLeft: string = '0',
+  length: number = 2,
+): string => {
+  if (typeof element === 'number') {
+    if (element > 9) return element.toString();
+    return element.toString().padStart(length, addInLeft);
+  }
+  return element.padStart(length, addInLeft);
+};
+
+/**
+ * Date to string day/month/year
+ */
+const dateFormat = (date: Date, withZero: boolean = true): string => {
+  if (withZero)
+    return `${addLeftZero(date.getDate())}/${addLeftZero(
+      date.getMonth(),
+    )}/${date.getFullYear()}`;
+
+  return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+};
+
+/**
  * Clone date object
  */
 const clone = (date: Date) => new Date(date);
@@ -65,5 +93,7 @@ export {
   previousMonth,
   nextMonth,
   totalDaysOfMonth,
+  dateFormat,
+  addLeftZero,
   clone,
 };

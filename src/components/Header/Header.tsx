@@ -39,7 +39,7 @@ const Container = styled.div`
   padding: 10px 20px;
 `;
 const InfoContainer = styled.div`
-  color: #fff;
+  color: ${({ theme }) => theme.header.color};
 `;
 const Month = styled.span`
   margin: 0 2px;

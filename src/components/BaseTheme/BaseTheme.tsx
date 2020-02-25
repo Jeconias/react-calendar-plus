@@ -4,11 +4,16 @@ import { ThemeProvider, DefaultTheme } from 'styled-components';
 //TODO Add types
 const basetheme: DefaultTheme = {
   header: {
-    backgroundColor: '#333',
+    backgroundColor: '#f0f0f0',
+    color: '#333',
+    arrows: {
+      color: '#ccc',
+    },
   },
   body: {
     week: {
-      backgroundColor: '#f9fafc',
+      backgroundColor: '#f0f0f0',
+      color: '#333',
     },
     month: {
       backgroundColor: '#fff',
@@ -16,6 +21,9 @@ const basetheme: DefaultTheme = {
         today: {
           backgroundColor: '#4F83D4',
           color: '#fff',
+        },
+        selectedDay: {
+          color: '#000',
         },
         ago: {
           backgroundColor: 'red',

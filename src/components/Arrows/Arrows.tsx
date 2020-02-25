@@ -22,9 +22,9 @@ export default Arrows;
 
 const Arrow = styled('div')<Props>`
   position: relative;
-  width: 24px;
-  height: 24px;
-  border: 2px solid #fff;
+  width: 16px;
+  height: 16px;
+  /**border: 2px solid ${({ theme }) => theme.header.arrows.color};*/
   border-radius: 100%;
   background-color: transparent;
   cursor: pointer;
@@ -37,9 +37,9 @@ const Arrow = styled('div')<Props>`
     bottom: 0;
     left: 0;
     margin: auto;
-    width: 6px;
-    height: 6px;
-    border: 2px solid #fff;
+    width: 4px;
+    height: 4px;
+    border: 2px solid ${({ theme }) => theme.header.arrows.color};
     border-right: none;
     border-bottom: none;
     ${({ direction }) => {
@@ -62,6 +62,7 @@ const Arrow = styled('div')<Props>`
           transform: rotate(-135deg);
         `;
       return css`
+        left: -2px;
         transform: rotate(-45deg);
       `;
     }}

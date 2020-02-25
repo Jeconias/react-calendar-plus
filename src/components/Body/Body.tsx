@@ -27,13 +27,13 @@ const Body: React.FC = () => {
   return (
     <Container>
       <DaysOfWeek>
-        <Day>{t('daysOfWeek.sun')}</Day>
-        <Day>{t('daysOfWeek.mon')}</Day>
-        <Day>{t('daysOfWeek.tue')}</Day>
-        <Day>{t('daysOfWeek.wed')}</Day>
-        <Day>{t('daysOfWeek.thu')}</Day>
-        <Day>{t('daysOfWeek.fri')}</Day>
-        <Day>{t('daysOfWeek.sat')}</Day>
+        <DayWeek className="dayWeek">{t('daysOfWeek.sun')}</DayWeek>
+        <DayWeek className="dayWeek">{t('daysOfWeek.mon')}</DayWeek>
+        <DayWeek className="dayWeek">{t('daysOfWeek.tue')}</DayWeek>
+        <DayWeek className="dayWeek">{t('daysOfWeek.wed')}</DayWeek>
+        <DayWeek className="dayWeek">{t('daysOfWeek.thu')}</DayWeek>
+        <DayWeek className="dayWeek">{t('daysOfWeek.fri')}</DayWeek>
+        <DayWeek className="dayWeek">{t('daysOfWeek.sat')}</DayWeek>
       </DaysOfWeek>
       <DaysOfMonth>
         <AgoDays
@@ -49,23 +49,25 @@ const Body: React.FC = () => {
 
 export default Body;
 
-export const ContainerDay = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+const Container = styled.div``;
 
-export const Day = styled.div`
+const DayWeek = styled.li`
   margin: 0 2px;
 `;
 
 const DaysOfWeek = styled.ul`
   display: grid;
+  grid-column-gap: 2px;
   grid-template-columns: repeat(7, 1fr);
-  padding-top: 10px;
+  padding: 5px 15px 10px;
+  text-align: center;
+  list-style: none;
+  margin: 0;
   background-color: ${({ theme }) => theme.body.week.backgroundColor};
+  color: ${({ theme }) => theme.body.week.color};
+  border-bottom: 1px solid #ddd;
 
-  ${Day} {
+  & > .dayWeek {
     font-size: ${rem(14)};
     font-weight: 500;
   }
@@ -74,48 +76,55 @@ const DaysOfWeek = styled.ul`
 const DaysOfMonth = styled.ul`
   position: relative;
   display: grid;
+  grid-column-gap: 2px;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, minmax(min-content, 27px));
   grid-auto-rows: 37px;
   align-items: center;
+  list-style: none;
+  padding: 0 15px;
+  margin: 0;
   background-color: ${({ theme }) => theme.body.month.backgroundColor};
 
-  ${Day} {
+  & .day {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height: 20px;
-    padding: 2px;
+    width: 16px;
+    height: 16px;
+    padding: 3px;
     font-size: ${rem(13)};
     border-radius: 100%;
+    transition: 0.2s ease-in;
+    cursor: pointer;
+
+    :hover {
+      background-color: #f0f0f0;
+    }
   }
 
   ${({ theme }) => css`
-    & > .agoDay > ${Day} {
+    & > .agoDay > .day {
       color: ${theme.body.month.days.ago.color};
     }
 
-    & > .currentDay > ${Day} {
+    & > .currentDay > .day {
       color: ${theme.body.month.days.current.color};
     }
 
-    & > .nextDay > ${Day} {
+    & > .nextDay > .day {
       color: ${theme.body.month.days.next.color};
     }
 
-    & > .today > ${Day} {
+    & > .today > .day {
+      color: ${theme.body.month.days.selectedDay.color};
+      font-weight: 700;
+    }
+
+    & > .selectedDay > .day {
       color: ${theme.body.month.days.today.color};
       background-color: ${theme.body.month.days.today.backgroundColor};
+      font-weight: 700;
     }
   `}
-`;
-
-const Container = styled.div`
-  ${DaysOfWeek}, ${DaysOfMonth} {
-    text-align: center;
-    list-style: none;
-    padding: 5px 20px;
-    margin: 0;
-  }
 `;

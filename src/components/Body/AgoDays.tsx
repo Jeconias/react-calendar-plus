@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { AgoDaysInterface } from '@src/core/interfaces/AgoDaysInterface';
-import { ContainerDay, Day } from './Body';
+import Day from '@components/Day/Day';
 
 const AgoDays: React.FC<AgoDaysInterface> = ({
   firstDayOfMonth,
@@ -14,9 +14,9 @@ const AgoDays: React.FC<AgoDaysInterface> = ({
   return (
     <Fragment>
       {render.map((day: number) => (
-        <ContainerDay className="agoDay" key={`${day}-agoDay`}>
-          <Day>{day}</Day>
-        </ContainerDay>
+        <Day className="agoDay" day={day} key={`${day}-agoDay`}>
+          {day}
+        </Day>
       ))}
     </Fragment>
   );
