@@ -1,6 +1,6 @@
 {
   "name": "react-calendar-plus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "None",
   "main": "./dist/bundle.js",
   "scripts": {
