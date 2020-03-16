@@ -1,12 +1,11 @@
 const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 const ENTRY = './src/index.tsx';
 const OUTPUT_DIR = 'dist';
 const OUTPUT_FILENAME = 'bundle.js';
 const LIBRARY_NAME = 'CalendarPlus';
 
-module.exports = {
+const baseConfig = {
   entry: ENTRY,
   output: {
     library: LIBRARY_NAME,
@@ -33,15 +32,10 @@ module.exports = {
       '@src': path.resolve(__dirname, './src'),
       '@components': path.resolve(__dirname, './src/components'),
       '@core': path.resolve(__dirname, './src/core'),
+      react: path.resolve('./node_modules/react'),
     },
     extensions: ['.js', '.json', '.tsx', '.ts'],
   },
-  plugins: [
-    new HtmlWebPackPlugin({
-      template: './tests/index.html',
-      filename: 'index.html',
-    }),
-  ],
   devServer: {
     allowedHosts: ['127.0.0.1'],
     contentBase: [path.join(__dirname, 'dist')],
@@ -49,4 +43,19 @@ module.exports = {
     open: true,
     port: 1717,
   },
+};
+
+module.exports = (env) => {
+  const isProd = env && env.production;
+
+  if (isProd)
+    return {
+      ...baseConfig,
+      externals: {
+        react: 'react',
+        'react-dom': 'react-dom',
+      },
+    };
+
+  return baseConfig;
 };

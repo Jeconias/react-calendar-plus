@@ -5,7 +5,9 @@ import ReactDom from 'react-dom';
 
 import CalendarPlus from './CalendarPlus';
 
-const calendarPreview: HTMLElement = document.getElementById('calendarPreview');
+const calendarPreview: HTMLElement | null = document.getElementById(
+  'calendarPreview',
+);
 
 if (calendarPreview) ReactDom.render(<CalendarPlus />, calendarPreview);
 
