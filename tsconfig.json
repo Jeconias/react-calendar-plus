@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "es6",
@@ -11,9 +11,10 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@src/*": ["./*"],
-      "@components/*": ["components/*"],
-      "@core/*": ["core/*"]
+      "@src/*": ["./src*"],
+      "@components/*": ["./src/components/*"],
+      "@core/*": ["./src/core/*"],
+      "@public/*": ["public/*"]
     }
   },
   "exclude": ["./node_modules/**/*"],
