@@ -12,9 +12,10 @@ const BaseInput: React.FC<BaseInputInterface> = ({ date, withZero }) => {
 
 export default BaseInput;
 
+//TODO Add enhancement in width of input and calendar (auto)
 const Input = styled('input')`
   box-sizing: border-box;
-  width: 220px;
+  width: 257px;
   border: 1px solid #ccc;
   border-radius: 3px;
   padding: 5px 10px;

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import { rem } from 'polished';
+import { rem, transparentize } from 'polished';
 import { useTranslation } from 'react-i18next';
 import {
   totalDaysOfMonth,
@@ -63,8 +63,8 @@ const DaysOfWeek = styled.ul`
   text-align: center;
   list-style: none;
   margin: 0;
-  background-color: ${({ theme }) => theme.body.week.backgroundColor};
-  color: ${({ theme }) => theme.body.week.color};
+  background-color: ${({ theme }) => theme.primary};
+  color: ${({ theme }) => theme.supportText};
   border-bottom: 1px solid #ddd;
 
   & > .dayWeek {
@@ -84,7 +84,7 @@ const DaysOfMonth = styled.ul`
   list-style: none;
   padding: 0 15px;
   margin: 0;
-  background-color: ${({ theme }) => theme.body.month.backgroundColor};
+  background-color: #fff;
 
   & .day {
     display: flex;
@@ -105,25 +105,31 @@ const DaysOfMonth = styled.ul`
 
   ${({ theme }) => css`
     & > .agoDay > .day {
-      color: ${theme.body.month.days.ago.color};
+      color: ${transparentize(
+        theme.supportMonth.amount,
+        theme.supportMonth.color,
+      )};
     }
 
     & > .currentDay > .day {
-      color: ${theme.body.month.days.current.color};
+      color: ${theme.supportMonth.color};
     }
 
     & > .nextDay > .day {
-      color: ${theme.body.month.days.next.color};
+      color: ${transparentize(
+        theme.supportMonth.amount,
+        theme.supportMonth.color,
+      )};
     }
 
     & > .today > .day {
-      color: ${theme.body.month.days.selectedDay.color};
+      color: ${theme.supportMonth.color};
       font-weight: 700;
     }
 
     & > .selectedDay > .day {
-      color: ${theme.body.month.days.today.color};
-      background-color: ${theme.body.month.days.today.backgroundColor};
+      color: #fff;
+      background-color: ${theme.secondary};
       font-weight: 700;
     }
   `}

@@ -1,43 +1,20 @@
 import React from 'react';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { darken } from 'polished';
 
 //TODO Add types
 const basetheme: DefaultTheme = {
-  header: {
-    backgroundColor: '#f0f0f0',
+  primary: '#f0f0f0',
+  secondary: '#007D7F',
+  support: {
+    color: '#000',
+    amount: 0.5,
+  },
+  supportMonth: {
     color: '#333',
-    arrows: {
-      color: '#ccc',
-    },
+    amount: 0.5,
   },
-  body: {
-    week: {
-      backgroundColor: '#f0f0f0',
-      color: '#333',
-    },
-    month: {
-      backgroundColor: '#fff',
-      days: {
-        today: {
-          backgroundColor: '#4F83D4',
-          color: '#fff',
-        },
-        selectedDay: {
-          color: '#000',
-        },
-        ago: {
-          backgroundColor: 'red',
-          color: '#e3e3e3',
-        },
-        current: {
-          color: '#414141',
-        },
-        next: {
-          color: '#e3e3e3',
-        },
-      },
-    },
-  },
+  supportText: '#333',
 };
 
 const BaseTheme: React.FunctionComponent = (props) => {

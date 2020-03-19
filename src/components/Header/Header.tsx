@@ -35,11 +35,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: ${({ theme }) => theme.header.backgroundColor};
+  background-color: ${({ theme }) => theme.primary};
   padding: 10px 20px;
 `;
 const InfoContainer = styled.div`
-  color: ${({ theme }) => theme.header.color};
+  color: ${({ theme }) => theme.supportText};
 `;
 const Month = styled.span`
   margin: 0 2px;

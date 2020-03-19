@@ -6,7 +6,16 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'simple-import-sort/sort': 'error',
     'import/no-duplicates': 'error',
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        trailingComma: 'all',
+        bracketSpacing: true,
+        jsxBracketSameLine: true,
+        singleQuote: true,
+        arrowParens: 'always',
+      },
+    ],
     'react-hooks/exhaustive-deps': 'warn',
     'react/jsx-filename-extension': 'off',
     'sort-imports': 'off',

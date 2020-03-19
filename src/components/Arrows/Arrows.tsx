@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import React from 'react';
+import { transparentize } from 'polished';
 
 interface Props {
   direction?: string;
@@ -24,7 +25,6 @@ const Arrow = styled('div')<Props>`
   position: relative;
   width: 16px;
   height: 16px;
-  /**border: 2px solid ${({ theme }) => theme.header.arrows.color};*/
   border-radius: 100%;
   background-color: transparent;
   cursor: pointer;
@@ -39,7 +39,9 @@ const Arrow = styled('div')<Props>`
     margin: auto;
     width: 4px;
     height: 4px;
-    border: 2px solid ${({ theme }) => theme.header.arrows.color};
+    border: 2px solid
+      ${({ theme }) =>
+        transparentize(theme.support.amount, theme.support.color)};
     border-right: none;
     border-bottom: none;
     ${({ direction }) => {

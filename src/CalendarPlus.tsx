@@ -3,20 +3,25 @@ import Body from '@components/Body/Body';
 import Header from '@components/Header/Header';
 import CalendarPlusInterface from '@core/interfaces/CalendarPlusInterface';
 import { clone, nextMonth, previousMonth } from '@core/utils/calendar';
+import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import CalendarContext, {
   CalendarContextInterface,
 } from './CalendarPlusContext';
 import BaseInput from './components/Form/BaseInput';
+import Panel from './components/Panel/Panel';
 
 const CalendarPlus: React.FC<CalendarPlusInterface> = ({
   selected,
+  showConfig,
   onChangeDay,
 }) => {
   const [date, setDate] = useState(selected || new Date());
   const [selectedDate, setSelectedDate] = useState(date);
+  const [isOpenPanel, setIsOpenPanel] = useState<boolean>(true);
 
   const handleNextMonth = () => {
     const nextM: number = nextMonth(date);
@@ -53,6 +58,12 @@ const CalendarPlus: React.FC<CalendarPlusInterface> = ({
         <Container>
           <BaseInput date={selectedDate} />
           <ContainerCalendar>
+            <Panel isOpen={isOpenPanel} />
+            <Config
+              showConfig={showConfig}
+              animateOnChange={isOpenPanel}
+              onClick={() => setIsOpenPanel(!isOpenPanel)}
+            />
             <Header
               handleNextMonth={handleNextMonth}
               handlePreviousMonth={handlePreviousMonth}
@@ -73,9 +84,39 @@ const Container = styled.div`
 
 const ContainerCalendar = styled.div`
   position: absolute;
-  width: 220px;
   box-shadow: 0 6px 20px 0 rgba(13, 51, 32, 0.1);
   border-radius: 5px;
   border: 1px solid #ddd;
   overflow: hidden;
+`;
+
+const Config = styled(({ showConfig, animateOnChange, ...props }) => (
+  <div {...props}>
+    <FontAwesomeIcon icon={faCog} color="grey" />
+  </div>
+))`
+  position: absolute;
+  bottom: 8px;
+  right: -20px;
+  width: 15px;
+  height: 15px;
+  z-index: 1;
+  cursor: pointer;
+  transition: 0.3s;
+  & > svg {
+    transition: 0.9s;
+  }
+  ${({ showConfig }) =>
+    showConfig &&
+    css`
+      transform: translateX(-25px);
+    `}
+
+  ${({ animateOnChange }) =>
+    animateOnChange &&
+    css`
+      svg {
+        transform: rotate(180deg);
+      }
+    `}
 `;

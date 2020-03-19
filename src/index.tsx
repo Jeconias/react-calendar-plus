@@ -9,6 +9,8 @@ const calendarPreview: HTMLElement | null = document.getElementById(
   'calendarPreview',
 );
 
-if (calendarPreview) ReactDom.render(<CalendarPlus />, calendarPreview);
+if (calendarPreview) {
+  ReactDom.render(<CalendarPlus showConfig />, calendarPreview);
+}
 
 export default CalendarPlus;
