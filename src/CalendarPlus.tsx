@@ -25,22 +25,16 @@ const CalendarPlus: React.FC<CalendarPlusInterface> = ({
 
   const handleNextMonth = () => {
     const nextM: number = nextMonth(date);
-    const newDate: number = date.setFullYear(
-      nextM === 0 ? date.getFullYear() + 1 : date.getFullYear(),
-      nextM,
-      date.getDate(),
-    );
-    setDate(new Date(newDate));
+    const newYear: number =
+      nextM === 0 ? date.getFullYear() + 1 : date.getFullYear();
+    setDate(new Date(newYear, nextM, date.getDate()));
   };
 
   const handlePreviousMonth = () => {
     const previousM: number = previousMonth(date);
-    const newDate: number = date.setFullYear(
-      previousM === 11 ? date.getFullYear() - 1 : date.getFullYear(),
-      previousM,
-      date.getDate(),
-    );
-    setDate(new Date(newDate));
+    const newYear: number =
+      previousM === 11 ? date.getFullYear() - 1 : date.getFullYear();
+    setDate(new Date(newYear, previousM, date.getDate()));
   };
 
   const context: CalendarContextInterface = {
@@ -56,7 +50,7 @@ const CalendarPlus: React.FC<CalendarPlusInterface> = ({
     <CalendarContext.Provider value={context}>
       <BaseTheme>
         <Container>
-          <BaseInput date={selectedDate} />
+          <BaseInput date={clone(selectedDate)} />
           <ContainerCalendar>
             <Panel
               isOpen={isOpenPanel}

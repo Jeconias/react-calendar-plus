@@ -104,6 +104,7 @@ const addLeftZero = (
  * @return string
  */
 const dateFormat = (date: Date, withZero: boolean = true): string => {
+  console.log(addLeftZero(date.getMonth()), ' hi', date.getMonth());
   if (withZero)
     return `${addLeftZero(date.getDate())}/${addLeftZero(
       date.getMonth(),
@@ -111,6 +112,17 @@ const dateFormat = (date: Date, withZero: boolean = true): string => {
 
   return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 };
+
+/**
+ * Check if two dates is equal
+ *
+ * @param date Date
+ * @param secondDate Date
+ *
+ * @return boolean
+ */
+const compareDate = (date: Date, secondDate: Date): boolean =>
+  date.getTime() === secondDate.getTime();
 
 /**
  * Clone date object
@@ -129,5 +141,6 @@ export {
   totalDaysOfMonth,
   dateFormat,
   addLeftZero,
+  compareDate,
   clone,
 };

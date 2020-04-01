@@ -2,13 +2,14 @@ import React, { Fragment, useContext } from 'react';
 import { CurrentDaysInterface } from 'core/interfaces/CurrentDaysInterface';
 import CalendarContext from '../../CalendarPlusContext';
 import Day from 'components/Day/Day';
+import { clone } from 'core/utils/calendar';
 
 const CurrentDays: React.FC<CurrentDaysInterface> = (
   props: CurrentDaysInterface,
 ) => {
   const context = useContext(CalendarContext);
 
-  const { getDate, getSelectedDate } = context;
+  const { getDate } = context;
   const { daysOfCurrentMonth } = props;
 
   const render: number[] = [];
@@ -19,14 +20,14 @@ const CurrentDays: React.FC<CurrentDaysInterface> = (
   return (
     <Fragment>
       {render.map((day: number) => {
+        const dateOfDay: Date = clone(getDate());
+        dateOfDay.setDate(day);
         const todayClass = day === getDate().getDate() ? 'today' : '';
-        const selectedDayClass =
-          day === getSelectedDate().getDate() ? 'selectedDay' : '';
 
         return (
           <Day
-            className={`currentDay ${todayClass} ${selectedDayClass}`}
-            day={day}
+            className={`currentDay ${todayClass}`}
+            dateOfDay={dateOfDay}
             key={`${day}-currentDay`}>
             {day}
           </Day>

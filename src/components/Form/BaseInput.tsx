@@ -1,12 +1,17 @@
 import React from 'react';
 import { BaseInputInterface } from 'core/interfaces/BaseInputInterface';
-import { dateFormat } from 'core/utils/calendar';
+import { addLeftZero } from 'core/utils/calendar';
 import styled from 'styled-components';
 
-const BaseInput: React.FC<BaseInputInterface> = ({ date, withZero }) => {
-  const value = dateFormat(date, withZero);
+const BaseInput: React.FC<BaseInputInterface> = ({ date }) => {
   return (
-    <Input type="text" value={value} onChange={() => console.log('//TODO')} />
+    <Input
+      type="text"
+      value={`${addLeftZero(date.getDate())}/${addLeftZero(
+        date.getMonth() + 1,
+      )}/${date.getFullYear()}`}
+      onChange={() => console.log('//TODO')}
+    />
   );
 };
 

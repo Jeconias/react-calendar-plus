@@ -2,18 +2,19 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { DayInterface } from 'core/interfaces/DayInterface';
 import CalendarContext from '../../CalendarPlusContext';
+import { compareDate } from 'core/utils/calendar';
 
-const Day: React.FC<DayInterface> = ({ children, day, className }) => {
+const Day: React.FC<DayInterface> = ({ children, dateOfDay, className }) => {
   const context = useContext(CalendarContext);
-  const { getDate, handleSelectedDate } = context;
+  const { handleSelectedDate, getSelectedDate } = context;
+
+  const selectedDayClass = compareDate(dateOfDay, getSelectedDate())
+    ? 'selectedDay'
+    : '';
 
   return (
-    <Container className={className}>
-      <DayElement
-        className="day"
-        onClick={() => {
-          handleSelectedDate(new Date(getDate().setDate(day)));
-        }}>
+    <Container className={`${className} ${selectedDayClass}`}>
+      <DayElement className="day" onClick={() => handleSelectedDate(dateOfDay)}>
         {children}
       </DayElement>
     </Container>
