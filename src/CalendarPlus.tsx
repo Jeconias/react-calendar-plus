@@ -58,7 +58,10 @@ const CalendarPlus: React.FC<CalendarPlusInterface> = ({
         <Container>
           <BaseInput date={selectedDate} />
           <ContainerCalendar>
-            <Panel isOpen={isOpenPanel} />
+            <Panel
+              isOpen={isOpenPanel}
+              onClose={() => setIsOpenPanel((prev) => !prev)}
+            />
             <Config
               showConfig={showConfig}
               animateOnChange={isOpenPanel}
@@ -92,12 +95,12 @@ const ContainerCalendar = styled.div`
 
 const Config = styled(({ showConfig, animateOnChange, ...props }) => (
   <div {...props}>
-    <FontAwesomeIcon icon={faCog} color="grey" />
+    <FontAwesomeIcon icon={faCog} size="sm" color="grey" />
   </div>
 ))`
   position: absolute;
   bottom: 8px;
-  right: -20px;
+  right: -23px;
   width: 15px;
   height: 15px;
   z-index: 1;

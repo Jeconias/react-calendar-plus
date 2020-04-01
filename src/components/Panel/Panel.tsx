@@ -3,16 +3,20 @@ import styled, { css } from 'styled-components';
 import { PanelInterface } from '@src//core/interfaces/PanelInterface';
 import Select from '@components/Select/Select';
 import CheckBox from '../Checkbox/CheckBox';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 
 //TODO Add translation
 //TODO Implement method to change language
-const Panel: React.FC<PanelInterface> = ({ isOpen }) => {
+const Panel: React.FC<PanelInterface> = ({ isOpen, onClose }) => {
   const [language, setLanguage] = useState<string>('en-us');
+  const { t, i18n } = useTranslation();
 
   const handleOnChangeLanguage = (selected: string) => {
-    console.log(selected);
-    setLanguage(selected);
-    //TODO Implement
+    i18n.changeLanguage(selected, (error) => {
+      if (error) console.log('//TODO Solve it');
+    });
   };
 
   return (
@@ -22,15 +26,21 @@ const Panel: React.FC<PanelInterface> = ({ isOpen }) => {
           <Select
             initValue={language}
             onChange={handleOnChangeLanguage}
-            label="Language">
-            <option value="pt-br">pt-BR</option>
-            <option value="en-us">en-US</option>
+            label={t('calendarPanel.features.languages')}>
+            {i18n.languages.map((language, k) => (
+              <option key={k} value={language}>
+                {language}
+              </option>
+            ))}
           </Select>
         </li>
         <li>
           <CheckBox label="anyConfig" />
         </li>
       </ul>
+      <ArrowContainer onClick={() => onClose()}>
+        <FontAwesomeIcon icon={faArrowLeft} size="sm" color="grey" />
+      </ArrowContainer>
     </Container>
   );
 };
@@ -43,10 +53,11 @@ const Container = styled.div<{ isOpen: Boolean }>`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   transition: 0.3s;
   transform: translateX(calc(100vw + 500px));
   background-color: #fff;
+  padding: 15px;
 
   ${({ isOpen }) =>
     isOpen &&
@@ -57,9 +68,9 @@ const Container = styled.div<{ isOpen: Boolean }>`
   & > ul {
     height: 100%;
     margin: 0;
-    padding: 15px;
     box-sizing: border-box;
     list-style: none;
+    padding: 0;
 
     & > li {
       display: flex;
@@ -68,4 +79,10 @@ const Container = styled.div<{ isOpen: Boolean }>`
       margin-bottom: 15px;
     }
   }
+`;
+
+const ArrowContainer = styled.div`
+  position: absolute;
+  bottom: 8px;
+  cursor: pointer;
 `;

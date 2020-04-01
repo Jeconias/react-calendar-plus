@@ -27,13 +27,13 @@ const Body: React.FC = () => {
   return (
     <Container>
       <DaysOfWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.sun')}</DayWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.mon')}</DayWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.tue')}</DayWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.wed')}</DayWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.thu')}</DayWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.fri')}</DayWeek>
-        <DayWeek className="dayWeek">{t('daysOfWeek.sat')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.sun')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.mon')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.tue')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.wed')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.thu')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.fri')}</DayWeek>
+        <DayWeek className="dayWeek">{t('calendar.daysOfWeek.sat')}</DayWeek>
       </DaysOfWeek>
       <DaysOfMonth>
         <AgoDays

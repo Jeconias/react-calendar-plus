@@ -21,7 +21,7 @@ const Header = (props: CalendarHeaderInterface) => {
     <Container>
       <Arrow onClick={() => handlePreviousMonth()} />
       <InfoContainer>
-        <Month>{t(`months.${cDate.getMonth()}`)}</Month>
+        <Month>{t(`calendar.months.${cDate.getMonth()}`)}</Month>
         <Year>{cDate.getFullYear()}</Year>
       </InfoContainer>
       <Arrow direction="right" onClick={() => handleNextMonth()} />

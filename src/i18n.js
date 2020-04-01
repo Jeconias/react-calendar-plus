@@ -6,7 +6,8 @@ import { initReactI18next } from 'react-i18next';
 // TODO require should be removed
 export default i18n.use(initReactI18next).init({
   lng: 'en-US',
-  fallbackLng: 'en-US',
+  fallbackLng: ['en-US', 'pt-BR'],
+  load: 'currentOnly',
   resources: {
     ...translationEN_US,
     ...translationPT_BR,
