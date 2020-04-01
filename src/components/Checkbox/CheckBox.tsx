@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import styled, { css } from 'styled-components';
 import { rem, darken } from 'polished';
-import { CheckBoxInterface } from '@src//core/interfaces/CheckBoxInterface';
+import { CheckBoxInterface } from 'core/interfaces/CheckBoxInterface';
 
 const CheckBox: React.FC<CheckBoxInterface> = ({ label, onChange }) => {
   const [checked, setChecked] = useState<boolean>(false);

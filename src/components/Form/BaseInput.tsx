@@ -1,6 +1,6 @@
 import React from 'react';
-import { BaseInputInterface } from '@src/core/interfaces/BaseInputInterface';
-import { dateFormat, addLeftZero } from '@src/core/utils/calendar';
+import { BaseInputInterface } from 'core/interfaces/BaseInputInterface';
+import { dateFormat } from 'core/utils/calendar';
 import styled from 'styled-components';
 
 const BaseInput: React.FC<BaseInputInterface> = ({ date, withZero }) => {

@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
-import { CurrentDaysInterface } from '@src/core/interfaces/CurrentDaysInterface';
-import CalendarContext from '@src/CalendarPlusContext';
-import Day from '@components/Day/Day';
+import { CurrentDaysInterface } from 'core/interfaces/CurrentDaysInterface';
+import CalendarContext from '../../CalendarPlusContext';
+import Day from 'components/Day/Day';
 
 const CurrentDays: React.FC<CurrentDaysInterface> = (
   props: CurrentDaysInterface,

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { PanelInterface } from '@src//core/interfaces/PanelInterface';
-import Select from '@components/Select/Select';
-import CheckBox from '../Checkbox/CheckBox';
+import { PanelInterface } from 'core/interfaces/PanelInterface';
+import Select from 'components/Select/Select';
+import CheckBox from 'components/Checkbox/CheckBox';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useTranslation } from 'react-i18next';
@@ -10,14 +10,20 @@ import { useTranslation } from 'react-i18next';
 //TODO Add translation
 //TODO Implement method to change language
 const Panel: React.FC<PanelInterface> = ({ isOpen, onClose }) => {
-  const [language, setLanguage] = useState<string>('en-us');
   const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState<string>(i18n.language);
 
-  const handleOnChangeLanguage = (selected: string) => {
-    i18n.changeLanguage(selected, (error) => {
-      if (error) console.log('//TODO Solve it');
-    });
-  };
+  useEffect(() => {
+    const handleOnChangeLanguage = (selected: string) => {
+      i18n.changeLanguage(selected, (error) => {
+        if (error) {
+          console.log('//TODO Solve it');
+          return;
+        }
+      });
+    };
+    handleOnChangeLanguage(language);
+  }, [language]);
 
   return (
     <Container isOpen={isOpen}>
@@ -25,7 +31,7 @@ const Panel: React.FC<PanelInterface> = ({ isOpen, onClose }) => {
         <li>
           <Select
             initValue={language}
-            onChange={handleOnChangeLanguage}
+            onChange={(selected) => setLanguage(selected)}
             label={t('calendarPanel.features.languages')}>
             {i18n.languages.map((language, k) => (
               <option key={k} value={language}>

@@ -28,14 +28,12 @@ const baseConfig = {
     ],
   },
   resolve: {
-    alias: {
-      '@src': path.resolve(__dirname, './src'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@core': path.resolve(__dirname, './src/core'),
-      '@public': path.resolve(__dirname, './public'),
-      react: path.resolve('./node_modules/react'),
-    },
     extensions: ['.js', '.json', '.tsx', '.ts'],
+    alias: {
+      components: path.resolve(__dirname, 'src/components'),
+      core: path.resolve(__dirname, 'src/core'),
+      react: path.resolve('node_modules/react'),
+    },
   },
   devServer: {
     allowedHosts: ['127.0.0.1'],

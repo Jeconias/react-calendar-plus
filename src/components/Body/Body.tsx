@@ -7,8 +7,8 @@ import {
   firstDayMonth,
   previousMonth,
   clone,
-} from '@core/utils/calendar';
-import CalendarContext from '@src/CalendarPlusContext';
+} from 'core/utils/calendar';
+import CalendarContext from '../../CalendarPlusContext';
 import AgoDays from './AgoDays';
 import CurrentDays from './CurrentDays';
 import NextDays from './NextDays';

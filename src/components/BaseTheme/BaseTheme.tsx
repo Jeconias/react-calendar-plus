@@ -1,6 +1,5 @@
 import React from 'react';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
-import { darken } from 'polished';
 
 //TODO Add types
 const basetheme: DefaultTheme = {

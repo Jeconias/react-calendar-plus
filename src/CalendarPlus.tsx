@@ -1,18 +1,18 @@
-import BaseTheme from '@components/BaseTheme/BaseTheme';
-import Body from '@components/Body/Body';
-import Header from '@components/Header/Header';
-import CalendarPlusInterface from '@core/interfaces/CalendarPlusInterface';
-import { clone, nextMonth, previousMonth } from '@core/utils/calendar';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BaseTheme from 'components/BaseTheme/BaseTheme';
+import Body from 'components/Body/Body';
+import BaseInput from 'components/Form/BaseInput';
+import Header from 'components/Header/Header';
+import Panel from 'components/Panel/Panel';
+import CalendarPlusInterface from 'core/interfaces/CalendarPlusInterface';
+import { clone, nextMonth, previousMonth } from 'core/utils/calendar';
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import CalendarContext, {
   CalendarContextInterface,
 } from './CalendarPlusContext';
-import BaseInput from './components/Form/BaseInput';
-import Panel from './components/Panel/Panel';
 
 const CalendarPlus: React.FC<CalendarPlusInterface> = ({
   selected,
@@ -21,7 +21,7 @@ const CalendarPlus: React.FC<CalendarPlusInterface> = ({
 }) => {
   const [date, setDate] = useState(selected || new Date());
   const [selectedDate, setSelectedDate] = useState(date);
-  const [isOpenPanel, setIsOpenPanel] = useState<boolean>(true);
+  const [isOpenPanel, setIsOpenPanel] = useState<boolean>(false);
 
   const handleNextMonth = () => {
     const nextM: number = nextMonth(date);

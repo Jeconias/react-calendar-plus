@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { DayInterface } from '@src/core/interfaces/DayInterface';
-import CalendarContext from '@src/CalendarPlusContext';
+import { DayInterface } from 'core/interfaces/DayInterface';
+import CalendarContext from '../../CalendarPlusContext';
 
 const Day: React.FC<DayInterface> = ({ children, day, className }) => {
   const context = useContext(CalendarContext);

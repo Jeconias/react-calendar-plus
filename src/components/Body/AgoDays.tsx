@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { AgoDaysInterface } from '@src/core/interfaces/AgoDaysInterface';
-import Day from '@components/Day/Day';
+import { AgoDaysInterface } from 'core/interfaces/AgoDaysInterface';
+import Day from 'components/Day/Day';
 
 const AgoDays: React.FC<AgoDaysInterface> = ({
   firstDayOfMonth,

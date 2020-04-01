@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { NextDaysInterface } from '@src/core/interfaces/NextDaysInterface';
-import Day from '@components/Day/Day';
+import { NextDaysInterface } from 'core/interfaces/NextDaysInterface';
+import Day from 'components/Day/Day';
 
 const NextDays: React.FC<NextDaysInterface> = (props: NextDaysInterface) => {
   const { daysOfNextMonth } = props;

@@ -1,7 +1,7 @@
-import Arrow from '@components/Arrows/Arrows';
+import Arrow from 'components/Arrows/Arrows';
 import React, { useContext } from 'react';
 import styled, { css } from 'styled-components';
-import CalendarContext from '@src/CalendarPlusContext';
+import CalendarContext from '../../CalendarPlusContext';
 import { useTranslation } from 'react-i18next';
 
 interface CalendarHeaderInterface {

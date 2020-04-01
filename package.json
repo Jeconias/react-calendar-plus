@@ -79,5 +79,7 @@
       "eslint ./src/*.tsx --fix"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "i18next-browser-languagedetector": "^4.0.2"
+  }
 }

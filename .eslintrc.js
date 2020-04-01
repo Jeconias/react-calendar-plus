@@ -21,6 +21,7 @@ module.exports = {
     'sort-imports': 'off',
     'import/order': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'operator-linebreak': [2, 'after'],
     'import/extensions': [
       'error',
       'ignorePackages',

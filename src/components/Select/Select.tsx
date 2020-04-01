@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { SelectInterface } from '@src//core/interfaces/SelectInterface';
+import { SelectInterface } from 'core/interfaces/SelectInterface';
 
 const Select: React.FC<SelectInterface> = ({
   label,

@@ -1,11 +1,19 @@
 /**
  * Check if the year is leap
+ *
+ * @param date Date
+ *
+ * @return boolean
  */
 const isLeap = (date: Date): Boolean =>
   date.getFullYear() % 100 !== 0 && date.getFullYear() % 4 === 0;
 
 /**
  * Return first day of month
+ *
+ * @param date Date
+ *
+ * @return number
  */
 const firstDayMonth = (date: Date): number => {
   const newDate = date.setDate(1);
@@ -14,18 +22,30 @@ const firstDayMonth = (date: Date): number => {
 
 /**
  * when month is equal to 0, return to 11
+ *
+ * @param date Date
+ *
+ * @return number
  */
 const previousMonth = (date: Date): number =>
   date.getMonth() != 0 ? date.getMonth() - 1 : 11;
 
 /**
  * when month is 11, return to 0
+ *
+ * @param date Date
+ *
+ * @return number
  */
 const nextMonth = (date: Date): number =>
   date.getMonth() != 11 ? date.getMonth() + 1 : 0;
 
 /**
  * Method to return total days of month
+ *
+ * @param date Date
+ *
+ * @return number
  */
 const totalDaysOfMonth = (date: Date): number => {
   let currentMonth = date.getMonth();
@@ -56,8 +76,13 @@ const totalDaysOfMonth = (date: Date): number => {
 
 /**
  * add zero to the left
+ *
+ * @param element string | number
+ * @param addInLeft string
+ * @param length number
+ *
+ * @return string
  */
-
 const addLeftZero = (
   element: string | number,
   addInLeft: string = '0',
@@ -72,6 +97,11 @@ const addLeftZero = (
 
 /**
  * Date to string day/month/year
+ *
+ * @param date Date
+ * @param withZero boolean
+ *
+ * @return string
  */
 const dateFormat = (date: Date, withZero: boolean = true): string => {
   if (withZero)
@@ -84,8 +114,12 @@ const dateFormat = (date: Date, withZero: boolean = true): string => {
 
 /**
  * Clone date object
+ *
+ * @param date
+ *
+ * @return Date
  */
-const clone = (date: Date) => new Date(date);
+const clone = (date: Date): Date => new Date(date);
 
 export {
   isLeap,
